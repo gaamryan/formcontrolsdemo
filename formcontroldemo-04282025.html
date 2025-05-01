@@ -31,8 +31,9 @@
 
 
             /* Dark Theme Text/Element Colors */
-            --primary-color-dark: #4dabf7;
-            --primary-hover-color-dark: #74c0fc;
+            /* Adjusted for contrast */
+            --primary-color-dark: #228be6; /* Changed from #4dabf7 */
+            --primary-hover-color-dark: #1c7ed6; /* Changed from #74c0fc */
             --text-color-dark: #eee;
             --border-color-dark: #4a4a4a;
             --label-color-dark: #bbb;
@@ -52,12 +53,13 @@
             --alert-info-text-dark: #a6cfff;
             --overlay-bg-dark: rgba(0, 0, 0, 0.7);
 
-
-            --error-color: #d9534f;
+            /* Adjusted for contrast */
+            --error-color: #c9302c; /* Changed from #d9534f */
             --focus-outline-color: #005fcc;
             --input-focus-border-color: #005fcc;
-            --focus-outline-color-dark: #4dabf7;
-            --input-focus-border-color-dark: #4dabf7;
+            /* Adjusted to use new primary dark color */
+            --focus-outline-color-dark: var(--primary-color-dark); /* Was #4dabf7 */
+            --input-focus-border-color-dark: var(--primary-color-dark); /* Was #4dabf7 */
 
             --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
             --spacing-unit: 8px;
@@ -110,7 +112,7 @@
             --alert-info-text: var(--alert-info-text-dark);
             --overlay-bg: var(--overlay-bg-dark);
 
-
+            /* Dark theme error color (was already okay, just ensuring it's explicitly set) */
             --error-color: #f78b88;
             --focus-outline-color: var(--focus-outline-color-dark);
             --input-focus-border-color: var(--input-focus-border-color-dark);
@@ -137,7 +139,7 @@
             min-height: 100%;
             line-height: 1.6;
             padding: 0 0 3rem 0;
-            padding-top: 190px;
+            padding-top: 0px;
             transition: color 0.3s ease;
         }
         body.modal-open {
@@ -150,20 +152,20 @@
         }
 
 
-        /* --- Theme Toggle (Inside Header) --- */
-        .theme-toggle-container {
-            display: flex;
-            align-items: center;
-            gap: calc(var(--spacing-unit) / 2);
-            background: var(--theme-toggle-bg);
-            padding: calc(var(--spacing-unit) / 2);
-            border-radius: 4px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            transition: background-color 0.3s ease;
-        }
-        body.dark-theme .theme-toggle-container {
-             box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
+ /* --- Theme Toggle (Inside Header) --- */
+ .theme-toggle-container {
+     display: flex;
+     align-items: center;
+     gap: calc(var(--spacing-unit) / 2);
+     background: transparent;
+     padding: calc(var(--spacing-unit) / 2);
+     border-radius: 4px;
+     /* box-shadow removed */
+     transition: background-color 0.3s ease;
+ }
+ body.dark-theme .theme-toggle-container {
+      /* box-shadow removed */
+ }
 
         .theme-toggle-container label {
              font-size: 0.9em;
@@ -195,12 +197,13 @@
              list-style: none;
         }
          .accessibility-notes ul ul {
-              padding-left: 1rem;
-              list-style: disc;
-              margin-top: calc(var(--spacing-unit) / 2);
-         }
+             padding-left: 1rem;
+             list-style: disc;
+             margin-top: calc(var(--spacing-unit) / 2);
+        }
          .accessibility-notes li {
              margin-bottom: calc(var(--spacing-unit) / 2);
+             font-weight: 400;
          }
 
 
@@ -230,8 +233,8 @@
             top: 0;
             left: 0;
             right: 0;
-            background-color: var(--header-bg);
-            padding: calc(var(--spacing-unit) * 2);
+            background-color: var(--header-bg); /* Reverted */
+            padding: calc(var(--spacing-unit) * 2); /* Reverted */
             border-bottom: 1px solid var(--border-color);
             z-index: 100;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -301,15 +304,12 @@
             margin-bottom: 1rem;
         }
 
-        .search-form button#searchBtn {
-            width: 100%;
-            margin: 0;
-            order: 2;
-        }
+        /* Commented out search button remains commented out */
+        /* .search-form button#searchBtn { ... } */
         .search-form button#selectControlBtn {
             width: 100%;
             margin: 0;
-            order: 3;
+            order: 3; /* Adjust order if searchBtn is removed */
         }
 
 
@@ -441,7 +441,7 @@
 
         /* Required Fields */
         .required-indicator {
-            color: var(--error-color);
+            color: var(--error-color); /* Uses updated contrast-safe color */
             margin-left: 2px;
             font-weight: bold;
         }
@@ -476,7 +476,7 @@
             align-items: center;
             justify-content: center;
             font-weight: 400;
-            color: #fff;
+            color: #fff; /* Default white text */
             text-align: center;
             vertical-align: middle;
             cursor: pointer;
@@ -496,12 +496,14 @@
          .form-group > button,
          .dialog_form_actions > button {
              margin-bottom: var(--spacing-unit);
-         }
+        }
          .form-group > button:last-child,
          .dialog_form_actions > button:last-child {
               margin-bottom: 0;
          }
 
+        /* Keep button text white for dark theme now primary color is darker */
+        /* body.dark-theme button { color: #002b4d; } /* Removed - using new primary color */
 
         button:hover,
         input[type="submit"]:hover,
@@ -510,9 +512,11 @@
         a.button-like:hover {
             background-color: var(--primary-hover-color);
             border-color: var(--primary-hover-color);
-            color: #fff;
+            color: #fff; /* Keep hover text white */
             text-decoration: none;
         }
+
+        /* body.dark-theme button:hover { color: #002b4d; } */ /* Removed */
 
         /* Secondary/Cancel Button Style */
         button.secondary,
@@ -527,10 +531,8 @@
             background-color: var(--primary-hover-color);
             border-color: var(--primary-hover-color);
         }
-        body.dark-theme button.secondary:hover {
-             color: var(--text-color-dark);
-             background-color: color-mix(in srgb, var(--primary-color-dark) 30%, transparent);
-        }
+        /* Keep dark theme secondary hover text white */
+        /* body.dark-theme button.secondary:hover { ... } */ /* No longer needs specific text color override */
 
 
         /* Disabled State */
@@ -651,7 +653,7 @@
          .file-input-wrapper .button-like {
              margin: 0;
              flex-shrink: 0;
-         }
+        }
         .file-input-wrapper .file-name-display {
             display: inline-block;
             font-size: 0.9em;
@@ -684,60 +686,121 @@
             transition: color 0.3s ease;
         }
 
+/* --- Styles for Password Show/Hide Button --- */
+.password-input-container {
+     position: relative;
+     /* Adjust spacing if input has margin-top */
+      margin-top: calc(var(--spacing-unit) / 2);
+ }
+
+ .password-input-container input[type="password"],
+ .password-input-container input[type="text"] {
+    /* Reset margin-top from common input style */
+    margin-top: 0;
+    /* Add padding on the right to prevent text overlap with button */
+    padding-right: calc(var(--spacing-unit) * 8); /* Adjust as needed */
+ }
+
+ .password-toggle-btn {
+     position: absolute;
+     /* Vertically center within the input's height */
+     top: 0;
+     bottom: 0;
+     height: fit-content; /* Adjust height based on content */
+     margin: auto 0;
+     /* Position on the right */
+     right: var(--spacing-unit);
+     /* Styling to look like an inline button */
+     background: transparent;
+     border: none;
+     padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
+     cursor: pointer;
+     color: var(--primary-color);
+     font-weight: 600; /* Slightly bolder */
+     font-size: 0.85em;
+     /* Override base button styles */
+     min-height: 30px; /* Ensure minimum clickable height */
+     min-width: auto;
+     margin-right: 0; /* Remove base button margin */
+     line-height: 1; /* Adjust line height */
+     border-radius: 3px;
+     z-index: 2; /* Ensure it's above the input */
+ }
+
+ .password-toggle-btn:hover,
+ .password-toggle-btn:focus-visible { /* Use focus-visible */
+     color: var(--primary-hover-color);
+     background-color: transparent;
+     text-decoration: underline;
+     /* Ensure focus style is clear even without outline */
+     /* box-shadow: 0 0 0 2px color-mix(in srgb, var(--focus-outline-color) 25%, transparent); */
+     /* Outline might be better here */
+ }
+
+  /* Explicit focus-visible style for the button */
+ .password-toggle-btn:focus-visible {
+    outline: 2px solid var(--focus-outline-color);
+    outline-offset: 1px;
+ }
+ .password-toggle-btn:focus {
+     outline: none; /* Remove default focus potentially added */
+ }
+
+ /* --- End Password Button Styles --- */ 
 
         /* Toggle Switch Styling */
         .switch {
-          position: relative;
-          display: inline-flex;
-          align-items: center;
-          width: 50px;
-          height: 28px;
-          vertical-align: middle;
-          margin-top: calc(var(--spacing-unit) / 2);
-          min-height: var(--min-control-height);
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 50px;
+            height: 28px;
+            vertical-align: middle;
+            margin-top: calc(var(--spacing-unit) / 2);
+            min-height: var(--min-control-height);
         }
 
         .switch input {
-          opacity: 0;
-          width: 0;
-          height: 0;
-          position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
         }
 
         .slider {
-          position: absolute;
-          cursor: pointer;
-          top: 50%;
-          transform: translateY(-50%);
-          left: 0;
-          right: 0;
-          height: 28px;
-          background-color: var(--input-border-color);
-          transition: .4s;
-          border-radius: 28px;
+            position: absolute;
+            cursor: pointer;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            right: 0;
+            height: 28px;
+            background-color: var(--input-border-color);
+            transition: .4s;
+            border-radius: 28px;
         }
 
         .slider:before {
-          position: absolute;
-          content: "";
-          height: 20px;
-          width: 20px;
-          left: 4px;
-          bottom: 4px;
-          background-color: white;
-          transition: .4s;
-          border-radius: 50%;
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
         }
         body.dark-theme .slider:before {
-            background-color: #ddd;
+             background-color: #ddd;
         }
 
         input:checked + .slider {
-          background-color: var(--primary-color);
+            background-color: var(--primary-color);
         }
 
         input:checked + .slider:before {
-          transform: translateX(22px);
+            transform: translateX(22px);
         }
 
 
@@ -772,7 +835,7 @@
             outline: 3px solid var(--focus-outline-color);
             outline-offset: 3px;
             opacity: 1;
-         }
+        }
          #scrollToTopBtn::before {
             content: '';
             display: inline-block;
@@ -785,7 +848,7 @@
             top: 45%;
             left: 50%;
             transform: translate(-50%, -50%);
-         }
+        }
 
         /* --- Utility Classes --- */
         .visually-hidden {
@@ -837,35 +900,36 @@
         }
 
         .dialog-close-btn {
-             position: absolute;
-             top: var(--spacing-unit);
-             right: var(--spacing-unit);
-             background: transparent;
-             border: none;
-             font-size: 1.8rem;
-             line-height: 1;
-             padding: calc(var(--spacing-unit) / 2);
-             cursor: pointer;
-             color: var(--label-color);
-             width: 40px;
-             height: 40px;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             border-radius: 50%;
-             margin: 0;
-             min-height: auto;
-             z-index: 1;
+            position: absolute;
+            top: var(--spacing-unit);
+            right: var(--spacing-unit);
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            line-height: 1;
+            padding: calc(var(--spacing-unit) / 2); /* Padding within the button */
+            cursor: pointer;
+            color: var(--label-color);
+            width: 44px; /* Changed from 40px */
+            height: 44px; /* Changed from 40px */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0;
+            min-height: auto; /* Override default button min-height if needed */
+            z-index: 1;
+            box-sizing: border-box; /* Ensure padding is included */
         }
-         .dialog-close-btn:hover, .dialog-close-btn:focus {
-              color: var(--text-color);
-              background-color: color-mix(in srgb, var(--border-color) 20%, transparent);
-         }
+        .dialog-close-btn:hover, .dialog-close-btn:focus {
+            color: var(--text-color);
+            background-color: color-mix(in srgb, var(--border-color) 20%, transparent);
+        }
 
         .dialog_label {
             font-size: 1.5rem;
             margin-bottom: var(--spacing-unit);
-            margin-right: 40px;
+            margin-right: 40px; /* Space for close button */
             color: var(--primary-color);
             flex-shrink: 0;
         }
@@ -934,7 +998,7 @@
          body.dark-theme #controlSelectList a:focus {
              background-color: color-mix(in srgb, var(--primary-color-dark) 15%, var(--component-bg));
              color: var(--primary-hover-color-dark);
-         }
+        }
 
 
         /* Accordion Styles */
@@ -1086,22 +1150,57 @@
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: var(--spacing-unit);
+            gap: calc(var(--spacing-unit) / 2); /* Reduced gap slightly */
             z-index: 10;
         }
+
         .carousel-pagination button {
-            background-color: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(0,0,0,0.5);
-            border-radius: 50%;
-            width: 12px;
-            height: 12px;
-            padding: 0;
-            cursor: pointer;
-            min-height: auto;
+            /* Make the button the target size */
+            width: 44px;
+            height: 44px;
+            min-height: 44px; /* Explicitly set min-height */
+            padding: 0; /* Remove default padding */
             margin: 0;
+            cursor: pointer;
+            border-radius: 50%; /* Round touch target */
+            background-color: transparent; /* Make button background invisible */
+            border: none; /* Remove button border */
+            display: inline-flex; /* Use flex to center the pseudo-element */
+            align-items: center;
+            justify-content: center;
+            position: relative; /* Needed for pseudo-element positioning if not using flex */
+            box-sizing: border-box;
+            /* Add transition for potential focus styles on the button itself */
+            transition: box-shadow 0.15s ease-in-out;
         }
-        .carousel-pagination button[aria-selected="true"] {
-            background-color: rgba(0, 0, 0, 0.8);
+        /* Style the visible dot using ::before */
+        .carousel-pagination button::before {
+            content: '';
+            display: block; /* Make it a block element */
+            width: 10px; /* Size of the visible dot */
+            height: 10px; /* Size of the visible dot */
+            border-radius: 50%; /* Make the dot round */
+            background-color: color-mix(in srgb, var(--text-color) 35%, transparent); /* Semi-transparent dot */
+            border: 1px solid color-mix(in srgb, var(--text-color) 50%, transparent);
+            transition: background-color 0.2s ease; /* Transition for selected state */
+        }
+
+        /* Style the dot for the selected state */
+        .carousel-pagination button[aria-selected="true"]::before {
+            background-color: var(--primary-color); /* Use primary color for selected */
+            border-color: var(--primary-color);
+        }
+
+        /* Optional: Subtle hover/focus indication on the button itself (around the dot) */
+        .carousel-pagination button:hover {
+        /* background-color: rgba(0, 0, 0, 0.05); /* Subtle background on hover */
+        }
+
+        /* Ensure focus style applies correctly (inherited :focus-visible should work, but override if needed) */
+        .carousel-pagination button:focus-visible {
+            outline: 2px solid var(--focus-outline-color);
+            outline-offset: 2px; /* Adjust offset as needed */
+            box-shadow: 0 0 0 2px color-mix(in srgb, var(--focus-outline-color) 25%, transparent); /* Match other focus */
         }
         .carousel-status {
              position: absolute;
@@ -1114,6 +1213,37 @@
              white-space: nowrap;
              border-width: 0;
         }
+
+        /* Add this new rule for the pause/play button */
+ .carousel-pause-play {
+    position: absolute;
+    top: var(--spacing-unit);
+    right: var(--spacing-unit);
+    z-index: 15; /* Above other controls */
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
+    cursor: pointer;
+    font-size: 0.8em;
+    min-height: 30px; /* Smaller button okay here if needed */
+    min-width: 60px; /* Give text space */
+    height: auto;
+    width: auto;
+ }
+  .carousel-pause-play:hover,
+  .carousel-pause-play:focus {
+     background-color: rgba(0, 0, 0, 0.8);
+ }
+ /* Ensure focus style is visible */
+ .carousel-pause-play:focus-visible {
+      outline: 2px solid var(--focus-outline-color);
+      outline-offset: 1px;
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--focus-outline-color) 25%, transparent);
+ }
+
+ /* --- End of new carousel button styles --- */
 
         /* Listbox Styles */
         .listbox-container {
@@ -1183,11 +1313,14 @@
         }
         .rearrange-buttons button {
             margin: 0;
-            padding: calc(var(--spacing-unit) / 2) var(--spacing-unit);
-            min-height: 30px;
-            font-size: 0.9em;
+            padding: 0;
+            min-height: 44px;
+            min-width: 44px;
+            width: 44px;
+            height: 44px;
+            font-size: 1.2em;
+            box-sizing: border-box;
         }
-
 
     </style>
 </head>
@@ -1219,10 +1352,45 @@
             <h2>Accordion</h2>
             <p>A vertically stacked set of interactive headings that each reveal an associated section of content.</p>
             <div class="accordion" id="myAccordion">
-                </div>
-            <pre><code>&lt;!-- ... Accordion HTML ... --&gt;</code></pre>
+                <div class="accordion-item">
+                     <button class="accordion-button" aria-expanded="false" aria-controls="panel1" id="btn1">Section 1</button>
+                     <div id="panel1" role="region" aria-labelledby="btn1" class="accordion-panel hidden">
+                         <p>Content for section 1.</p>
+                     </div>
+                 </div>
+                 <div class="accordion-item">
+                     <button class="accordion-button" aria-expanded="false" aria-controls="panel2" id="btn2">Section 2</button>
+                     <div id="panel2" role="region" aria-labelledby="btn2" class="accordion-panel hidden">
+                         <p>Content for section 2.</p>
+                     </div>
+                 </div>
+            </div>
+            <h3>Code Snippet</h3> <pre><code>&lt;!-- Example Accordion HTML Structure:
+&lt;div class="accordion"&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;button class="accordion-button" aria-expanded="false" aria-controls="panel1" id="btn1"&gt;Section 1&lt;/button&gt;
+    &lt;div id="panel1" role="region" aria-labelledby="btn1" class="accordion-panel hidden"&gt;
+       Content for section 1.
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="accordion-item"&gt;
+     &lt;button class="accordion-button" aria-expanded="false" aria-controls="panel2" id="btn2"&gt;Section 2&lt;/button&gt;
+     &lt;div id="panel2" role="region" aria-labelledby="btn2" class="accordion-panel hidden"&gt;
+       Content for section 2.
+     &lt;/div&gt;
+   &lt;/div&gt;
+&lt;/div&gt;
+ --&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes (Accordion)</h3>
+                 <ul>
+                    <li>Use heading elements (e.g., `h3`) inside the `button` for semantic structure, or ensure button text is descriptive.</li>
+                    <li>`aria-expanded` indicates state (true/false).</li>
+                    <li>`aria-controls` links button to its panel.</li>
+                    <li>Panel needs `role="region"` and `aria-labelledby` pointing to the button's ID.</li>
+                    <li>Panel should be hidden/shown (e.g., using `display: none;` or the `hidden` attribute) based on `aria-expanded`.</li>
+                    <li>Keyboard: Buttons focusable; Enter/Space toggles expansion. Arrow keys might navigate between buttons.</li>
+                </ul>
                 </div>
         </div>
 
@@ -1231,10 +1399,26 @@
             <p>Provides brief, important, and usually time-sensitive information. Often appears dynamically.</p>
             <button type="button" id="triggerAlertBtn">Trigger Alert</button>
             <div id="alertContainer">
-                </div>
-            <pre><code>&lt;!-- ... Alert HTML ... --&gt;</code></pre>
+                 </div>
+            <h3>Code Snippet</h3> <pre><code>&lt;!-- Example Alert HTML Structure:
+&lt;div class="alert" role="alert"&gt;
+  Your changes have been saved successfully.
+&lt;/div&gt;
+
+&lt;!-- Or for more assertive alerts (use sparingly): --&gt;
+&lt;div class="alert alert-danger" role="alert" aria-live="assertive"&gt;
+  Error: Please fill out all required fields.
+&lt;/div&gt;
+ --&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes (Alert)</h3>
+                <ul>
+                    <li>Use `role="alert"`.</li>
+                    <li>Content injected into this container is automatically announced by most screen readers.</li>
+                    <li>`aria-live="polite"` (implicit with `role="alert"`) is usually sufficient. Use `aria-live="assertive"` only for critical, time-sensitive errors.</li>
+                    <li>Alerts should ideally not receive focus.</li>
+                    <li>Provide a mechanism to dismiss alerts if they persist.</li>
+                </ul>
                 </div>
         </div>
 
@@ -1248,9 +1432,27 @@
                     <li><a href="#">Accessories</a></li>
                     <li aria-current="page"><span>Headphones</span></li> </ol>
             </nav>
-            <pre><code>&lt;!-- ... Breadcrumb HTML ... --&gt;</code></pre>
+            <h3>Code Snippet</h3> <pre><code>&lt;!-- Example Breadcrumb HTML Structure: --&gt;
+&lt;nav aria-label="Breadcrumb"&gt;
+  &lt;ol class="breadcrumb"&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/category/"&gt;Category&lt;/a&gt;&lt;/li&gt;
+    &lt;li aria-current="page"&gt;&lt;span&gt;Current Page&lt;/span&gt;&lt;/li&gt; &lt;!-- Use span if not linking --&gt;
+  &lt;/ol&gt;
+&lt;/nav&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes (Breadcrumb)</h3>
+                 <ul>
+                     <li>Wrap in a `<nav>` element with an `aria-label` (e.g., "Breadcrumb").</li>
+                     <li>Use an ordered list (`<ol>`) as it represents a sequence.</li>
+                     <li>Separate items visually (e.g., with CSS `::before` pseudo-elements containing '/').</li>
+                     <li>The *last* item representing the current page should:
+                         <ul>
+                            <li>Have `aria-current="page"`.</li>
+                            <li>Ideally *not* be a link. Use a `<span>` or similar non-interactive element.</li>
+                        </ul>
+                     </li>
+                 </ul>
                 </div>
         </div>
 
@@ -1264,9 +1466,31 @@
                 <button type="button" disabled>Disabled Action</button>
                 <a href="#some-section" class="button-like secondary" role="button">Link as Button</a>
             </div>
-             <pre><code>&lt;!-- ... Buttons HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;!-- Standard Button --&gt;
+&lt;button type="button"&gt;Action&lt;/button&gt;
+
+&lt;!-- Submit Button --&gt;
+&lt;button type="submit"&gt;Submit&lt;/button&gt;
+
+&lt;!-- Reset Button --&gt;
+&lt;button type="reset" class="secondary"&gt;Reset&lt;/button&gt;
+
+&lt;!-- Disabled Button --&gt;
+&lt;button type="button" disabled&gt;Cannot Click&lt;/button&gt;
+
+&lt;!-- Link Styled as Button --&gt;
+&lt;a href="#" class="button-like" role="button"&gt;Go Somewhere&lt;/a&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
+                 <ul>
+                    <li>Use `<button>` element for actions within a form or page.</li>
+                    <li>Use `<a>` with `role="button"` only when the action is navigation, but visually it should appear as a button.</li>
+                    <li>Ensure sufficient text contrast against button background (WCAG 1.4.11).</li>
+                    <li>Ensure clear visual focus indicator (WCAG 2.4.7).</li>
+                    <li>Ensure minimum target size (44x44px recommended) (WCAG 2.5.5).</li>
+                    <li>`disabled` attribute prevents interaction and is announced by screen readers.</li>
+                    <li>Button text should clearly describe the action performed.</li>
+                 </ul>
                 </div>
         </div>
 
@@ -1274,11 +1498,13 @@
             <h2>Carousel / Slideshow</h2>
             <p>A rotating set of content items (e.g., images, cards). Accessibility requires careful handling of controls and announcements.</p>
             <div class="carousel"
-                 aria-roledescription="carousel"
-                 aria-label="Featured Items Showcase">
-
-                 <div class="carousel-status" aria-live="polite" aria-atomic="true">
-                     </div>
+                tabindex="0" /* Added tabindex */
+                aria-roledescription="carousel"
+                aria-label="Featured Items Showcase">
+       
+                <button type="button" class="carousel-pause-play" aria-label="Pause carousel">Pause</button> <div class="carousel-status" aria-live="polite" aria-atomic="true">
+                    Item 1 of 3
+                </div>
 
                 <div class="carousel-slides">
                     <div class="carousel-slide"
@@ -1305,16 +1531,44 @@
 
                 <button type="button" class="carousel-button prev" aria-label="Previous Slide">‹</button>
                 <button type="button" class="carousel-button next" aria-label="Next Slide">›</button>
+       
 
                 <div class="carousel-pagination" role="tablist" aria-label="Slides">
-                    <button type="button" role="tab" aria-selected="true" aria-controls="slide-1-content" aria-label="Slide 1"></button>
-                    <button type="button" role="tab" aria-selected="false" aria-controls="slide-2-content" aria-label="Slide 2"></button>
-                    <button type="button" role="tab" aria-selected="false" aria-controls="slide-3-content" aria-label="Slide 3"></button>
+                    <button type="button" role="tab" aria-selected="true" aria-controls="slide-1-content" aria-label="Go to Slide 1"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="slide-2-content" aria-label="Go to Slide 2"></button>
+                    <button type="button" role="tab" aria-selected="false" aria-controls="slide-3-content" aria-label="Go to Slide 3"></button>
                 </div>
             </div>
-            <pre><code>&lt;!-- ... Carousel HTML ... --&gt;</code></pre>
+            <h3>Code Snippet</h3> <pre><code>&lt;!-- Example Carousel Structure (Simplified ARIA) --&gt;
+&lt;div class="carousel" aria-roledescription="carousel" aria-label="Descriptive Carousel Title"&gt;
+  &lt;div class="carousel-status" aria-live="polite" aria-atomic="true"&gt;
+    &lt;!-- Status text updated by JS, e.g., "Item 1 of 3" --&gt;
+  &lt;/div&gt;
+  &lt;div class="carousel-slides"&gt;
+    &lt;div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 3"&gt;
+      Slide 1 Content
+    &lt;/div&gt;
+    &lt;!-- More slides --&gt;
+  &lt;/div&gt;
+  &lt;button type="button" class="carousel-button prev" aria-label="Previous Slide"&gt;‹&lt;/button&gt;
+  &lt;button type="button" class="carousel-button next" aria-label="Next Slide"&gt;›&lt;/button&gt;
+  &lt;div class="carousel-pagination" role="tablist" aria-label="Select Slide"&gt;
+    &lt;button type="button" role="tab" aria-selected="true" aria-label="Go to Slide 1"&gt;&lt;/button&gt;
+    &lt;!-- More pagination buttons --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes (Carousel)</h3>
+                <ul>
+                    <li>Container: `aria-roledescription="carousel"`, `aria-label` for overall description.</li>
+                    <li>Slides: `role="group"`, `aria-roledescription="slide"`, `aria-label="[N] of [Total]"`</li>
+                    <li>Live Region: Use `aria-live="polite"` to announce slide changes (e.g., "Item 2 of 3").</li>
+                    <li>Controls (Prev/Next): Clear `aria-label` (e.g., "Previous Slide").</li>
+                    <li>Pagination: Use `role="tablist"` for the container, `role="tab"` for buttons. `aria-selected="true/false"`. Provide descriptive `aria-label` for each tab button (e.g., "Go to Slide 1").</li>
+                    <li>Keyboard: Ensure all controls are keyboard accessible. Consider arrow key navigation for slides.</li>
+                    <li>Auto-rotation: Provide pause/play controls (WCAG 2.2.2). Pause on hover/focus.</li>
+                    <li>Focus Management: Manage focus logically when interacting with controls.</li>
+                 </ul>
                 </div>
         </div>
 
@@ -1322,23 +1576,48 @@
             <h2>Checkbox</h2>
             <p>Allows users to select zero or more options.</p>
             <fieldset class="checkbox-group">
-                 <legend>Notification Preferences</legend>
-                 <div class="form-group">
+                <legend>Notification Preferences</legend>
+                <div class="form-group">
                     <input type="checkbox" id="checkNews" name="notifications" value="newsletter" checked>
                     <label for="checkNews" class="inline-label">Subscribe to Newsletter</label>
-                 </div>
-                 <div class="form-group">
+                </div>
+                <div class="form-group">
                      <input type="checkbox" id="checkUpdates" name="notifications" value="updates">
                      <label for="checkUpdates" class="inline-label">Receive Product Updates</label>
-                 </div>
-                 <div class="form-group">
+                </div>
+                <div class="form-group">
                      <input type="checkbox" id="checkOffers" name="notifications" value="offers" disabled>
                      <label for="checkOffers" class="inline-label">Get Special Offers (Unavailable)</label>
-                 </div>
+                </div>
             </fieldset>
-             <pre><code>&lt;!-- ... Checkbox HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;!-- Single Checkbox --&gt;
+&lt;div class="form-group"&gt;
+  &lt;input type="checkbox" id="agreeTerms" name="terms" value="agree"&gt;
+  &lt;label for="agreeTerms"&gt;I agree to the terms and conditions&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- Grouped Checkboxes --&gt;
+&lt;fieldset class="checkbox-group"&gt;
+  &lt;legend&gt;Select toppings:&lt;/legend&gt;
+  &lt;div class="form-group"&gt;
+    &lt;input type="checkbox" id="toppingPepperoni" name="toppings" value="pepperoni"&gt;
+    &lt;label for="toppingPepperoni"&gt;Pepperoni&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group"&gt;
+    &lt;input type="checkbox" id="toppingMushrooms" name="toppings" value="mushrooms"&gt;
+    &lt;label for="toppingMushrooms"&gt;Mushrooms&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
              <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
+                 <ul>
+                     <li><strong>Label Association:</strong> CRITICAL. Use `<label for="id">`. Clicking label should toggle checkbox.</li>
+                     <li><strong>Grouping:</strong> If multiple checkboxes relate to a single question, group them using `<fieldset>` and provide a `<legend>`.</li>
+                     <li><strong>State:</strong> The `checked` attribute handles the state. Screen readers announce "checked" or "not checked".</li>
+                     <li><strong>Keyboard:</strong> Focusable with Tab. Spacebar toggles checked state.</li>
+                     <li><strong>Target Size:</strong> Ensure the label provides a sufficient clickable area (WCAG 2.5.5). Your CSS padding seems adequate.</li>
+                     <li><strong>Disabled State:</strong> Use `disabled` attribute. Visually indicate and ensure it's not interactive.</li>
+                 </ul>
                 </div>
         </div>
 
@@ -1350,9 +1629,25 @@
                 <input type="datetime-local" id="datetimeInputExample" name="event_start" aria-describedby="datetimeHelp">
                 <small id="datetimeHelp" class="help-text">Select date and local time.</small>
             </div>
-            <pre><code>&lt;!-- ... DateTime Input HTML ... --&gt;</code></pre>
+            <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="meetingTime"&gt;Meeting Date and Time:&lt;/label&gt;
+  &lt;input type="datetime-local" id="meetingTime" name="meeting_datetime"
+         min="2025-05-01T08:30" max="2025-12-31T17:00"
+         aria-describedby="meetingTimeHelp"&gt;
+  &lt;small id="meetingTimeHelp" class="help-text"&gt;Select date and time (YYYY-MM-DDTHH:MM).&lt;/small&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
+                <ul>
+                     <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                     <li><strong>Type Attribute:</strong> `type="datetime-local"` triggers browser's native date/time picker UI.</li>
+                     <li><strong>Picker Accessibility:</strong> Varies significantly between browsers. Some native pickers have poor keyboard accessibility. TEST thoroughly.</li>
+                     <li><strong>Format Hint:</strong> Provide format guidance (`aria-describedby`) as presentation varies. Value format is `YYYY-MM-DDTHH:MM`.</li>
+                     <li><strong>Keyboard Input:</strong> Users should ideally be able to type the date/time directly.</li>
+                     <li><strong>Custom Pickers:</strong> If native pickers are inadequate, use a well-vetted accessible custom date/time picker component.</li>
+                     <li><strong>Min/Max Attributes:</strong> Define allowed range if applicable.</li>
+                     <li><strong>Target Size:</strong> Ensure min. 44px height (WCAG 2.5.5).</li>
+                 </ul>
                 </div>
         </div>
 
@@ -1364,9 +1659,25 @@
                 <input type="date" id="dateInputExample" name="appointment_date" min="2024-01-01" max="2025-12-31" aria-describedby="dateHelp">
                 <small id="dateHelp" class="help-text">Format: MM/DD/YYYY. Use calendar or type.</small>
             </div>
-            <pre><code>&lt;!-- ... Date Input HTML ... --&gt;</code></pre>
+            <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="birthDate"&gt;Date of Birth:&lt;/label&gt;
+  &lt;input type="date" id="birthDate" name="dob"
+         min="1900-01-01" max="2025-05-01" &lt;!-- Example range --&gt;
+         aria-describedby="birthDateHelp"&gt;
+  &lt;small id="birthDateHelp" class="help-text"&gt;Enter as MM/DD/YYYY or use picker.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
+                 <ul>
+                     <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                     <li><strong>Type Attribute:</strong> `type="date"` triggers browser's native date picker UI.</li>
+                     <li><strong>Picker Accessibility:</strong> Varies between browsers. TEST.</li>
+                     <li><strong>Format Hint:</strong> Provide format guidance (`aria-describedby`). Value format is `YYYY-MM-DD`.</li>
+                     <li><strong>Keyboard Input:</strong> Should allow direct typing.</li>
+                     <li><strong>Custom Pickers:</strong> Consider accessible custom pickers if native ones are problematic.</li>
+                     <li><strong>Min/Max Attributes:</strong> Define allowed date range.</li>
+                     <li><strong>Target Size:</strong> Ensure min. 44px height (WCAG 2.5.5).</li>
+                 </ul>
                 </div>
         </div>
 
@@ -1378,9 +1689,22 @@
                 <input type="email" id="emailInputExample" name="user_email" placeholder="you@example.com" aria-describedby="emailHelp">
                  <small id="emailHelp" class="help-text">We'll never share your email with anyone else.</small>
             </div>
-            <pre><code>&lt;!-- ... Email Input HTML ... --&gt;</code></pre>
+            <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="userEmail"&gt;Your Email Address:&lt;/label&gt;
+  &lt;input type="email" id="userEmail" name="email"
+         placeholder="name@domain.com" required aria-required="true"
+         multiple &lt;!-- Allows multiple comma-separated emails --&gt;
+         aria-describedby="userEmailHelp"&gt;
+  &lt;small id="userEmailHelp" class="help-text"&gt;Enter a valid email address.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
+                 <ul>
+                     <li>Follows general Text Input principles (Label, Focus, Target Size, etc.).</li>
+                     <li><strong>Type Attribute:</strong> `type="email"` provides semantic meaning, triggers appropriate mobile keyboards, and enables browser-level validation for email format (WCAG 3.3.1).</li>
+                     <li><strong>Multiple Attribute:</strong> If present, allows a list of comma-separated email addresses.</li>
+                     <li><strong>Validation Feedback:</strong> Ensure validation errors (native or custom) are clearly communicated accessibly (WCAG 3.3.1, 4.1.3).</li>
+                 </ul>
                 </div>
         </div>
 
@@ -1390,17 +1714,54 @@
             <div class="form-group">
                  <label for="fileInputExample">Upload Your Resume (PDF or DOCX)</label>
                  <div class="file-input-wrapper">
-                    <button type="button" class="button-like secondary" aria-hidden="true" tabindex="-1">Choose File</button>
-                    <span class="file-name-display" id="fileNameDisplayResume">No file chosen</span>
-                    <input type="file" id="fileInputExample" name="resume" accept=".pdf,.docx,.doc" aria-describedby="fileHelp resumeConstraints" onchange="document.getElementById('fileNameDisplayResume').textContent = this.files.length > 0 ? this.files[0].name : 'No file chosen';">
-                </div>
-                <small id="fileHelp" class="help-text">Max file size: 5MB.</small>
-                <div id="resumeConstraints" class="help-text">Accepted formats: PDF, DOC, DOCX.</div>
+                     <button type="button" class="button-like secondary" aria-hidden="true" tabindex="-1">Choose File</button>
+                     <span class="file-name-display" id="fileNameDisplayResume">No file chosen</span>
+                     <input type="file" id="fileInputExample" name="resume" accept=".pdf,.docx,.doc" aria-describedby="fileHelp resumeConstraints" onchange="document.getElementById('fileNameDisplayResume').textContent = this.files.length > 0 ? this.files[0].name : 'No file chosen';">
+                 </div>
+                 <small id="fileHelp" class="help-text">Max file size: 5MB.</small>
+                 <div id="resumeConstraints" class="help-text">Accepted formats: PDF, DOC, DOCX.</div>
             </div>
-            <pre><code>&lt;!-- ... File Input HTML ... --&gt;</code></pre>
-            <p><em>Note: Basic styling provided. Robust JS often needed.</em></p>
+            <h3>Code Snippet</h3> <pre><code>&lt;!-- Basic File Input --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label for="avatarUpload"&gt;Upload Profile Picture:&lt;/label&gt;
+  &lt;input type="file" id="avatarUpload" name="avatar"
+         accept="image/png, image/jpeg" &lt;!-- Specify accepted types --&gt;
+         aria-describedby="avatarHelp"&gt;
+  &lt;small id="avatarHelp" class="help-text"&gt;PNG or JPG only. Max 2MB.&lt;/small&gt;
+&lt;/div&gt;
+
+&lt;!-- Custom Styled File Input (like example above) --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label for="reportFile"&gt;Upload Report:&lt;/label&gt;
+  &lt;div class="file-input-wrapper"&gt;
+     &lt;!-- Decorative button (hidden from AT) --&gt;
+     &lt;button type="button" class="button-like secondary" aria-hidden="true" tabindex="-1"&gt;Choose File&lt;/button&gt;
+     &lt;!-- Display area for file name --&gt;
+     &lt;span class="file-name-display" id="fileNameDisplayReport"&gt;No file chosen&lt;/span&gt;
+     &lt;!-- Actual file input (visually hidden/layered) --&gt;
+     &lt;input type="file" id="reportFile" name="report" accept=".pdf,.txt"
+            aria-describedby="reportHelp"
+            onchange="..."&gt; &lt;!-- JS to update span --&gt;
+  &lt;/div&gt;
+  &lt;small id="reportHelp" class="help-text"&gt;PDF or TXT.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
+            <p><em>Note: Basic styling provided. Robust JS often needed for custom styling and feedback.</em></p>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
+                <ul>
+                     <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                     <li><strong>Native Input:</strong> The default `<input type="file">` is keyboard accessible but difficult to style consistently.</li>
+                     <li><strong>Custom Styling Pattern:**
+                         <ul>
+                             <li>Hide the actual `<input type="file">` visually but keep it accessible (e.g., opacity: 0, position absolute).</li>
+                             <li>Use a visible `<button>` (often with `aria-hidden="true"`) and/or styled `<span>` layered over the actual input. The label still points to the hidden input's ID.</li>
+                             <li>Use JS to display the selected filename(s) in a separate element (like the `<span>` in the example).</li>
+                             <li>Ensure the interactive area (the visible button/span) is large enough (WCAG 2.5.5).</li>
+                         </ul>
+                     </li>
+                     <li><strong>`accept` Attribute:</strong> Specify allowed file types (MIME types or extensions) to assist users.</li>
+                     <li><strong>Feedback:</strong> Provide clear feedback on selection, upload progress, and errors accessibly (e.g., using `aria-live` regions).</li>
+                </ul>
                 </div>
         </div>
 
@@ -1410,10 +1771,29 @@
             <form>
                 <input type="hidden" id="csrfToken" name="_csrf_token" value="aBcDeF12345GHIjkl">
                 <input type="hidden" id="sessionId" name="session_id" value="zyXwVu98765TsRqPo">
+                 <button type="submit">Submit with Hidden Data</button>
             </form>
-             <pre><code>&lt;!-- ... Hidden Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;form action="/process" method="post"&gt;
+  &lt;!-- Hidden input for security token --&gt;
+  &lt;input type="hidden" name="csrf_token" value="UNIQUE_TOKEN_HERE"&gt;
+
+  &lt;!-- Hidden input for tracking source --&gt;
+  &lt;input type="hidden" name="source" value="campaign_xyz"&gt;
+
+  &lt;!-- Visible form fields here --&gt;
+  &lt;label for="visibleField"&gt;Visible Data:&lt;/label&gt;
+  &lt;input type="text" id="visibleField" name="visible_data"&gt;
+
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
+                <ul>
+                    <li>`type="hidden"` fields are completely ignored by assistive technologies and are not part of the accessibility tree or tab order.</li>
+                    <li>They have no direct accessibility implications for end-users interacting with the form.</li>
+                    <li>Ensure they are used for data that the user does not need to know about or interact with directly (e.g., session IDs, security tokens, tracking parameters).</li>
+                    <li>Do NOT use them to hide information that *should* be available to the user.</li>
+                 </ul>
                 </div>
         </div>
 
@@ -1429,98 +1809,136 @@
                     role="listbox"
                     aria-labelledby="lb1-label"
                     aria-activedescendant=""> <li id="lb1-opt1" role="option" aria-selected="false">HTML</li>
-                    <li id="lb1-opt2" role="option" aria-selected="false">CSS</li>
-                    <li id="lb1-opt3" role="option" aria-selected="false">JavaScript</li>
-                    <li id="lb1-opt4" role="option" aria-selected="false">React</li>
-                    <li id="lb1-opt5" role="option" aria-selected="false">Angular</li>
-                    <li id="lb1-opt6" role="option" aria-selected="false">Vue</li>
-                    <li id="lb1-opt7" role="option" aria-selected="false">Python</li>
-                    <li id="lb1-opt8" role="option" aria-selected="false">PHP</li>
-                    <li id="lb1-opt9" role="option" aria-selected="false">Ruby</li>
+                     <li id="lb1-opt2" role="option" aria-selected="false">CSS</li>
+                     <li id="lb1-opt3" role="option" aria-selected="false">JavaScript</li>
+                     <li id="lb1-opt4" role="option" aria-selected="false">React</li>
+                     <li id="lb1-opt5" role="option" aria-selected="false">Angular</li>
+                     <li id="lb1-opt6" role="option" aria-selected="false">Vue</li>
+                     <li id="lb1-opt7" role="option" aria-selected="false">Python</li>
+                     <li id="lb1-opt8" role="option" aria-selected="false">PHP</li>
+                     <li id="lb1-opt9" role="option" aria-selected="false">Ruby</li>
                 </ul>
             </div>
-            <pre><code>&lt;!-- ... Scrollable Listbox HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;!-- Scrollable Single-Select Listbox --&gt;
+&lt;div class="listbox-container"&gt;
+  &lt;label id="country-label" class="listbox-label"&gt;Select Country:&lt;/label&gt;
+  &lt;ul id="country-listbox"
+      tabindex="0" &lt;!-- Make the container focusable --&gt;
+      role="listbox"
+      aria-labelledby="country-label"
+      aria-activedescendant="" &lt;!-- Updated by JS --&gt;
+      style="max-height: 150px; overflow-y: auto;"&gt;
+    &lt;li id="country-opt1" role="option" aria-selected="false"&gt;Canada&lt;/li&gt;
+    &lt;li id="country-opt2" role="option" aria-selected="false"&gt;Mexico&lt;/li&gt;
+    &lt;li id="country-opt3" role="option" aria-selected="false"&gt;USA&lt;/li&gt;
+    &lt;!-- More options --&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
 
             <h3 style="margin-top: calc(var(--spacing-unit)*4);">Listbox with Grouped Options</h3>
              <div class="listbox-container">
-                <label id="lb2-label" class="listbox-label">Choose a framework/library:</label>
-                <ul id="lb2"
-                    tabindex="0"
-                    role="listbox"
-                    aria-labelledby="lb2-label"
-                    aria-activedescendant="">
-                    <li role="presentation" class="listbox-group-label" id="lb2-group1-label">Frontend</li>
-                    <li id="lb2-opt1" role="option" aria-selected="false">React</li>
-                    <li id="lb2-opt2" role="option" aria-selected="false">Angular</li>
-                    <li id="lb2-opt3" role="option" aria-selected="false">Vue</li>
-                    <li role="presentation" class="listbox-group-label" id="lb2-group2-label">Backend</li>
-                    <li id="lb2-opt4" role="option" aria-selected="false">Node.js</li>
-                    <li id="lb2-opt5" role="option" aria-selected="false">Django</li>
-                    <li id="lb2-opt6" role="option" aria-selected="false">Ruby on Rails</li>
-                </ul>
+                 <label id="lb2-label" class="listbox-label">Choose a framework/library:</label>
+                 <ul id="lb2"
+                     tabindex="0"
+                     role="listbox"
+                     aria-labelledby="lb2-label"
+                     aria-activedescendant="">
+                     <li role="presentation" class="listbox-group-label" id="lb2-group1-label">Frontend</li>
+                     <li id="lb2-opt1" role="option" aria-selected="false">React</li>
+                     <li id="lb2-opt2" role="option" aria-selected="false">Angular</li>
+                     <li id="lb2-opt3" role="option" aria-selected="false">Vue</li>
+                     <li role="presentation" class="listbox-group-label" id="lb2-group2-label">Backend</li>
+                     <li id="lb2-opt4" role="option" aria-selected="false">Node.js</li>
+                     <li id="lb2-opt5" role="option" aria-selected="false">Django</li>
+                     <li id="lb2-opt6" role="option" aria-selected="false">Ruby on Rails</li>
+                 </ul>
             </div>
-             <pre><code>&lt;!-- ... Grouped Listbox HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;!-- Grouped Listbox --&gt;
+&lt;div class="listbox-container"&gt;
+  &lt;label id="food-label" class="listbox-label"&gt;Select Food Item:&lt;/label&gt;
+  &lt;ul id="food-listbox"
+      tabindex="0" role="listbox" aria-labelledby="food-label"&gt;
+    &lt;li role="presentation" class="listbox-group-label" id="fruit-group"&gt;Fruits&lt;/li&gt;
+    &lt;li id="food-opt1" role="option" aria-selected="false"&gt;Apple&lt;/li&gt;
+    &lt;li id="food-opt2" role="option" aria-selected="false"&gt;Banana&lt;/li&gt;
+    &lt;li role="presentation" class="listbox-group-label" id="veg-group"&gt;Vegetables&lt;/li&gt;
+    &lt;li id="food-opt3" role="option" aria-selected="false"&gt;Carrot&lt;/li&gt;
+    &lt;li id="food-opt4" role="option" aria-selected="false"&gt;Broccoli&lt;/li&gt;
+ &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
 
 
             <h3 style="margin-top: calc(var(--spacing-unit)*4);">Listbox with Rearrangeable Options (Simplified)</h3>
             <p><em>Note: Full keyboard support for rearranging is complex and omitted here. This example focuses on structure and basic interaction.</em></p>
             <div class="rearrange-listbox-wrapper">
                  <div class="listbox-container" style="flex-grow: 1;">
-                    <label id="lb3-label" class="listbox-label">Prioritize Tasks:</label>
-                    <ul id="lb3"
-                        tabindex="0"
-                        role="listbox"
-                        aria-labelledby="lb3-label"
-                        aria-multiselectable="false"
-                        aria-activedescendant="">
-                        <li id="lb3-opt1" role="option" aria-selected="false">Task A: Design Mockups</li>
-                        <li id="lb3-opt2" role="option" aria-selected="false">Task B: Develop API</li>
-                        <li id="lb3-opt3" role="option" aria-selected="false">Task C: Write Tests</li>
-                        <li id="lb3-opt4" role="option" aria-selected="false">Task D: User Documentation</li>
-                    </ul>
-                </div>
+                     <label id="lb3-label" class="listbox-label">Prioritize Tasks:</label>
+                     <ul id="lb3"
+                         tabindex="0"
+                         role="listbox"
+                         aria-labelledby="lb3-label"
+                         aria-multiselectable="false"
+                         aria-activedescendant="">
+                         <li id="lb3-opt1" role="option" aria-selected="false">Task A: Design Mockups</li>
+                         <li id="lb3-opt2" role="option" aria-selected="false">Task B: Develop API</li>
+                         <li id="lb3-opt3" role="option" aria-selected="false">Task C: Write Tests</li>
+                         <li id="lb3-opt4" role="option" aria-selected="false">Task D: User Documentation</li>
+                     </ul>
+                 </div>
                  <div class="rearrange-buttons">
-                     <button type="button" aria-label="Move selected item up" class="move-up-btn">▲</button>
-                     <button type="button" aria-label="Move selected item down" class="move-down-btn">▼</button>
+                      <button type="button" aria-label="Move selected item up" class="move-up-btn">▲</button>
+                      <button type="button" aria-label="Move selected item down" class="move-down-btn">▼</button>
                  </div>
             </div>
-             <pre><code>&lt;!-- ... Rearrangeable Listbox HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;!-- Rearrangeable Listbox --&gt;
+&lt;div class="rearrange-listbox-wrapper"&gt;
+  &lt;div class="listbox-container" style="flex-grow: 1;"&gt;
+    &lt;label id="priority-label" class="listbox-label"&gt;Set Priority:&lt;/label&gt;
+    &lt;ul id="priority-listbox"
+        tabindex="0" role="listbox" aria-labelledby="priority-label"&gt;
+      &lt;li id="prio-opt1" role="option" aria-selected="false"&gt;Item One&lt;/li&gt;
+      &lt;li id="prio-opt2" role="option" aria-selected="false"&gt;Item Two&lt;/li&gt;
+      &lt;li id="prio-opt3" role="option" aria-selected="false"&gt;Item Three&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;div class="rearrange-buttons"&gt;
+    &lt;button type="button" aria-label="Move selected item up" class="move-up-btn"&gt;▲&lt;/button&gt;
+    &lt;button type="button" aria-label="Move selected item down" class="move-down-btn"&gt;▼&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
 
             <div class="accessibility-notes">
                 <h3>Accessibility Notes (Listbox)</h3>
                 <ul>
-                    <li><strong>Role Structure:</strong> The container element has `role="listbox"`. Each selectable item within it has `role="option"`.</li>
-                    <li><strong>Labeling:</strong> The listbox must have an accessible name, usually via `aria-labelledby` pointing to a visible `<label>` element.</li>
+                    <li><strong>Role Structure:</strong> Container `role="listbox"`. Items `role="option"`.</li>
+                    <li><strong>Labeling:</strong> `aria-labelledby` points to a visible `<label>`.</li>
                     <li><strong>Focus Management:**
-                        <ul>
-                            <li>Typically, the listbox container itself is made focusable (`tabindex="0"`).</li>
-                            <li>Focus remains on the listbox container while the user navigates *options* using arrow keys.</li>
-                            <li>`aria-activedescendant` on the listbox container is updated via JS to point to the `id` of the currently *visually focused* option. This tells assistive technology which option is active without actually moving DOM focus to it.</li>
-                            <li>Options themselves usually have `tabindex="-1"` (or no tabindex) so they aren't in the default tab order.</li>
-                        </ul>
+                         <ul>
+                             <li>Listbox container `tabindex="0"`.</li>
+                             <li>Focus stays on container; `aria-activedescendant` points to focused option ID.</li>
+                             <li>Options usually `tabindex="-1"` or no tabindex.</li>
+                         </ul>
                     </li>
-                    <li><strong>Selection State:** Use `aria-selected="true|false"` on each option to indicate whether it's selected. Update via JS on user interaction (click, Enter, Space).</li>
-                    <li><strong>Multi-Select:** If multiple options can be selected, add `aria-multiselectable="true"` to the listbox container. Selection logic needs to handle Shift+Arrow, Ctrl+Click, Ctrl+Space, etc.</li>
+                    <li><strong>Selection State:** `aria-selected="true|false"` on options. Update via JS.</li>
+                    <li><strong>Multi-Select:** Add `aria-multiselectable="true"` to listbox container. Implement keyboard (Shift/Ctrl).</li>
                     <li><strong>Keyboard Navigation (Essential):**
-                        <ul>
-                            <li>Down/Up Arrow: Move visual focus (`aria-activedescendant`) to the next/previous option.</li>
-                            <li>Home/End: Move visual focus to the first/last option.</li>
-                            <li>PageUp/PageDown (Optional): Scroll and move focus up/down by a larger amount.</li>
-                            <li>Letter Keys: Move focus to the next option starting with that letter (type-ahead).</li>
-                            <li>Enter/Space: Select/deselect the focused option (toggle in multi-select).</li>
-                        </ul>
-                        (WCAG 2.1.1 Keyboard)
+                         <ul>
+                             <li>Down/Up Arrow: Move visual focus (`aria-activedescendant`).</li>
+                             <li>Home/End: Move to first/last option.</li>
+                             <li>Letter Keys: Type-ahead (Move focus to next option starting with letter).</li>
+                             <li>Enter/Space: Select/deselect focused option.</li>
+                         </ul>
+                         (WCAG 2.1.1 Keyboard)
                     </li>
-                     <li><strong>Scrollable Listbox:** Ensure keyboard navigation automatically scrolls the focused option (`aria-activedescendant`) into view.</li>
-                     <li><strong>Grouped Listbox:** Use `role="presentation"` on list items acting as group labels to remove them from the option count/navigation. Alternatively, use `role="group"` around sets of options with `aria-labelledby` pointing to the group label's ID. Keyboard navigation should typically skip over group labels.</li>
-                     <li><strong>Rearrangeable Listbox:** This adds significant complexity. In addition to standard listbox behavior:
-                        <ul>
-                            <li>Provide explicit visual buttons (Up/Down) for reordering.</li>
-                            <li>Provide a keyboard-only mechanism for reordering (e.g., Ctrl+Arrow keys when an item is selected). This requires capturing key events and manipulating the DOM order.</li>
-                            <li>Ensure screen readers announce the item's new position after moving.</li>
-                            <li>Consider drag-and-drop as an *enhancement*, but it must have a keyboard equivalent.</li>
-                        </ul>
-                    </li>
+                     <li><strong>Scrollable Listbox:** Keyboard navigation must scroll focused option into view.</li>
+                     <li><strong>Grouped Listbox:** Use `role="presentation"` on label `<li>` OR use `role="group"` around options. Keyboard nav should skip labels.</li>
+                     <li><strong>Rearrangeable Listbox:** COMPLEX.
+                         <ul>
+                             <li>Provide explicit visual buttons (Up/Down).</li>
+                             <li>Provide keyboard-only method (e.g., Ctrl+Arrows). MUST HAVE. (WCAG 2.1.1, 2.5.7 if drag/drop added)</li>
+                             <li>Announce new position after move (e.g., via `aria-live`).</li>
+                         </ul>
+                     </li>
                 </ul>
             </div>
         </div>
@@ -1537,54 +1955,80 @@
                      aria-labelledby="dialog1_label"
                      aria-modal="true"
                      class="dialog">
-                    <button type="button" class="dialog-close-btn" aria-label="Close dialog">&times;</button>
-                    <h2 id="dialog1_label" class="dialog_label">
-                        Add Delivery Address
-                    </h2>
-                    <form class="dialog_form">
-                        <div class="form-group">
-                            <label for="dialog-street">Street:</label>
-                            <input type="text" id="dialog-street" class="wide_input">
-                        </div>
-                        <div class="form-group">
-                            <label for="dialog-city">City:</label>
-                            <input type="text" id="dialog-city" class="city_input">
-                        </div>
-                        <div class="form-group">
-                            <label for="dialog-state">State:</label>
-                            <input type="text" id="dialog-state" class="state_input">
-                        </div>
+                     <button type="button" class="dialog-close-btn" aria-label="Close dialog">&times;</button>
+                     <h2 id="dialog1_label" class="dialog_label">
+                         Add Delivery Address
+                     </h2>
+                     <div class="dialog-content"> <form class="dialog_form">
                          <div class="form-group">
-                            <label for="dialog-zip">Zip:</label>
-                            <input type="text" id="dialog-zip" class="zip_input">
-                        </div>
-                    </form>
-                    <div class="dialog_form_actions">
-                        <button type="button" class="dialog-add-btn">Add</button>
-                        <button type="button" class="dialog-cancel-btn secondary">Cancel</button>
-                    </div>
-                </div>
+                             <label for="dialog-street">Street:</label>
+                             <input type="text" id="dialog-street" class="wide_input">
+                         </div>
+                         <div class="form-group">
+                             <label for="dialog-city">City:</label>
+                             <input type="text" id="dialog-city" class="city_input">
+                         </div>
+                         <div class="form-group">
+                             <label for="dialog-state">State:</label>
+                             <input type="text" id="dialog-state" class="state_input">
+                         </div>
+                          <div class="form-group">
+                             <label for="dialog-zip">Zip:</label>
+                             <input type="text" id="dialog-zip" class="zip_input">
+                         </div>
+                     </form> </div> <div class="dialog_form_actions">
+                         <button type="button" class="dialog-add-btn">Add</button>
+                         <button type="button" class="dialog-cancel-btn secondary">Cancel</button>
+                     </div>
+                 </div>
             </div>
 
-            <pre><code>&lt;!-- ... Modal Dialog HTML ... --&gt;</code></pre>
+            <h3>Code Snippet</h3> <pre><code>&lt;!-- Trigger Button --&gt;
+&lt;button type="button" id="openMyDialogBtn"&gt;Open Modal&lt;/button&gt;
+
+&lt;!-- Dialog Structure --&gt;
+&lt;div id="myDialogOverlay" class="dialog-overlay hidden"&gt;
+  &lt;div role="dialog"
+       id="myDialog"
+       aria-labelledby="myDialogLabel"
+       aria-describedby="myDialogDesc" &lt;!-- Optional --&gt;
+       aria-modal="true"
+       class="dialog"&gt;
+
+    &lt;button type="button" class="dialog-close-btn" aria-label="Close Dialog"&gt;&times;&lt;/button&gt;
+
+    &lt;h2 id="myDialogLabel" class="dialog_label"&gt;Dialog Title&lt;/h2&gt;
+
+    &lt;div class="dialog-content"&gt;
+        &lt;p id="myDialogDesc"&gt;This is the main content or description of the dialog.&lt;/p&gt;
+        &lt;!-- More form elements or content --&gt;
+    &lt;/div&gt;
+
+    &lt;div class="dialog_form_actions"&gt;
+      &lt;button type="button" class="dialog-confirm-btn"&gt;Confirm&lt;/button&gt;
+      &lt;button type="button" class="dialog-cancel-btn secondary"&gt;Cancel&lt;/button&gt;
+    &lt;/div&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes (Modal Dialog)</h3>
                 <ul>
                     <li><strong>Role & State:</strong> Use `role="dialog"` and `aria-modal="true"`.</li>
-                    <li><strong>Labeling:</strong> Provide a label using `aria-labelledby` pointing to a visible heading (`h2` preferred).</li>
-                    <li><strong>Description (Optional):</strong> Use `aria-describedby` to point to descriptive text if needed.</li>
-                    <li><strong>Visibility & Overlay:</strong> Dialog and its overlay should be hidden initially. Use JS to show/hide the overlay. The overlay visually obscures the background content.</li>
+                    <li><strong>Labeling:</strong> Provide label via `aria-labelledby` pointing to a visible heading (`h2` preferred).</li>
+                    <li><strong>Description (Optional):</strong> `aria-describedby` for additional descriptive text.</li>
+                    <li><strong>Visibility & Overlay:</strong> Hide initially. JS shows/hides. Overlay obscures background.</li>
                     <li><strong>Focus Management (CRITICAL):**
-                        <ul>
-                            <li>When opened, focus moves inside the dialog (e.g., first input or close button).</li>
-                            <li>Focus is trapped within the dialog.</li>
-                            <li>When closed, focus returns to the trigger element.</li>
-                        </ul>
-                        (WCAG 2.4.3 Focus Order, 2.1.1 Keyboard)
+                         <ul>
+                             <li>On open, focus moves inside (e.g., first input or close button).</li>
+                             <li>Focus is trapped within the dialog (Tab/Shift+Tab cycle inside).</li>
+                             <li>On close, focus returns to the trigger element.</li>
+                         </ul>
+                         (WCAG 2.4.3 Focus Order, 2.1.1 Keyboard)
                     </li>
                     <li><strong>Keyboard Dismissal:</strong> Allow closing via Escape key.</li>
-                    <li><strong>Dismiss Button:</strong> Provide a clearly labeled, keyboard-accessible close button (e.g., using `&times;` with an `aria-label`).</li>
-                    <li><strong>Background Inertness:** Use JS focus trapping. Optionally use `aria-hidden="true"` on background elements or the `<dialog>` element's native behavior.</li>
+                    <li><strong>Dismiss Button:</strong> Provide clearly labeled, keyboard-accessible close button.</li>
+                    <li><strong>Background Inertness:** Use JS focus trapping. `aria-hidden="true"` on background elements or native `<dialog>` behavior can also help.</li>
                 </ul>
             </div>
         </div>
@@ -1597,38 +2041,52 @@
                  <input type="month" id="monthInputExample" name="billing_month" min="2024-01" max="2025-12" aria-describedby="monthHelp">
                  <small id="monthHelp" class="help-text">Select billing month/year (YYYY-MM).</small>
             </div>
-            <pre><code>&lt;!-- ... Month Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="expiryMonth"&gt;Card Expiry Month/Year:&lt;/label&gt;
+  &lt;input type="month" id="expiryMonth" name="card_expiry"
+         min="2025-05" &lt;!-- Example: Current month/year --&gt;
+         aria-describedby="expiryHelp"&gt;
+  &lt;small id="expiryHelp" class="help-text"&gt;Format: YYYY-MM.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
              <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                  <ul>
-                    <li><strong>Label Association:</strong> Essential (<code>for</code>/<code>id</code>).</li>
-                    <li><strong>Native Picker Variance:</strong> Varies. TEST.</li>
-                    <li><strong>Format Hint:</strong> Value format YYYY-MM.</li>
-                    <li><strong>Keyboard/Custom Pickers:</strong> Similar considerations as Date.</li>
-                    <li><strong>Target Size:</strong> Ensure min. 44px height. (WCAG 2.5.5)</li>
-                </ul>
+                     <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                     <li><strong>Type Attribute:</strong> `type="month"` triggers browser's native month/year picker.</li>
+                     <li><strong>Picker Accessibility:</strong> Varies. TEST.</li>
+                     <li><strong>Format Hint:</strong> Provide format (`YYYY-MM`) guidance via `aria-describedby`.</li>
+                     <li><strong>Keyboard/Custom Pickers:</strong> Similar considerations as Date Input.</li>
+                     <li><strong>Target Size:</strong> Ensure min. 44px height. (WCAG 2.5.5)</li>
+                 </ul>
             </div>
         </div>
 
         <div class="form-control-item" id="number-input-section" data-keywords="number numeric input integer float quantity amount spinner">
             <h2>Number Input</h2>
             <p>Input for numerical values.</p>
-             <div class="form-group">
+              <div class="form-group">
                  <label for="numberInputExample">Quantity</label>
                  <input type="number" id="numberInputExample" name="quantity" min="1" max="10" step="1" value="1" aria-describedby="numberHelp">
                  <small id="numberHelp" class="help-text">Enter whole number (1-10).</small>
             </div>
-            <pre><code>&lt;!-- ... Number Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="itemQuantity"&gt;Number of Items:&lt;/label&gt;
+  &lt;input type="number" id="itemQuantity" name="quantity"
+         min="0" max="99" step="1" value="1" &lt;!-- Example range/step --&gt;
+         required aria-required="true"
+         aria-describedby="quantityHelp"&gt;
+  &lt;small id="quantityHelp" class="help-text"&gt;Enter a whole number between 0 and 99.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                  <ul>
-                    <li><strong>Label Association:</strong> Essential (<code>for</code>/<code>id</code>).</li>
-                    <li><strong>Type Attribute:</strong> `type="number"` triggers numeric keyboard.</li>
-                    <li><strong>Spinner Controls:</strong> Accessibility varies. Test. Ensure direct typing works.</li>
-                    <li><strong>Min/Max/Step:</strong> Use attributes to define constraints. (WCAG 3.3.2)</li>
-                    <li><strong>Validation:</strong> Native validation checks format/range.</li>
-                    <li><strong>Target Size:</strong> Ensure min. 44px height. (WCAG 2.5.5)</li>
-                </ul>
+                     <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                     <li><strong>Type Attribute:</strong> `type="number"` triggers numeric keyboard on mobile and enables browser validation/spinner controls.</li>
+                     <li><strong>Spinner Controls:</strong> Accessibility of native spinners varies. Ensure direct typing is easy and effective. Consider hiding spinners via CSS if problematic and relying on typing.</li>
+                     <li><strong>Min/Max/Step Attributes:</strong> Define constraints programmatically (WCAG 3.3.2).</li>
+                     <li><strong>Validation:</strong> Native validation checks format/range. Ensure errors are communicated accessibly.</li>
+                     <li><strong>Target Size:</strong> Ensure min. 44px height (WCAG 2.5.5).</li>
+                 </ul>
             </div>
         </div>
 
@@ -1637,16 +2095,50 @@
             <p>Input for sensitive information.</p>
             <div class="form-group">
                 <label for="passwordInputExample">Password</label>
-                <input type="password" id="passwordInputExample" name="user_pass" required aria-required="true" aria-describedby="passwordHelp">
-                 <small id="passwordHelp" class="help-text">Must be at least 8 characters long.</small>
+                <div class="password-input-container"> 
+                    <input type="password" id="passwordInputExample" name="user_pass" required aria-required="true" aria-describedby="passwordHelp" autocomplete="current-password">
+                    
+                    <button type="button"
+                            id="passwordToggleBtn"
+                            class="password-toggle-btn"
+                            aria-label="Show password"
+                            aria-controls="passwordInputExample">
+                        Show
+                    </button>
+                </div>
+                <small id="passwordHelp" class="help-text">Must be at least 8 characters long.</small>
             </div>
-             <pre><code>&lt;!-- ... Password Input HTML ... --&gt;</code></pre>
-             <div class="accessibility-notes">
+            <h3>Code Snippet</h3> <pre><code>&lt;!-- Password input with Show/Hide Toggle --&gt;
+       &lt;div class="form-group"&gt;
+        &lt;label for="userPassword"&gt;Enter Password:&lt;/label&gt;
+        &lt;div class="password-input-container"&gt; &lt;!-- Wrapper recommended for positioning --&gt;
+          &lt;input type="password" id="userPassword" name="password"
+                 required aria-required="true"
+                 autocomplete="current-password" &lt;!-- Or "new-password" --&gt;
+                 aria-describedby="passwordRules"&gt;
+          &lt;button type="button" class="password-toggle-btn"
+                  aria-label="Show password"
+                  aria-controls="userPassword"&gt; &lt;!-- Controls the input --&gt;
+            Show
+          &lt;/button&gt;
+        &lt;/div&gt;
+        &lt;small id="passwordRules" class="help-text"&gt;Minimum 8 characters, one number.&lt;/small&gt;
+       &lt;/div&gt;</code></pre>
+            <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                 <ul>
-                    <li>Follows Text Input principles.</li>
-                    <li><code>type="password"</code> masks input.</li>
-                    <li>Consider accessible <strong>"Show/Hide" toggle button</strong> (clear label, state announcement via ARIA, keyboard accessible, sufficient target size). (WCAG 4.1.2)</li>
+                    <li>Follows Text Input principles (Label, Focus, Target Size).</li>
+                    <li>`type="password"` masks input visually.</li>
+                    <li>**Show/Hide Toggle:** Strongly recommend adding an accessible button to toggle visibility (`type="password"` to `type="text"`).
+                        <ul>
+                            <li>Button needs clear label (e.g., "Show password", "Hide password") - **Use `aria-label`**.</li>
+                            <li>Announce state change by updating the `aria-label` and button text.</li>
+                            <li>Use `aria-controls` to link button to the input.</li>
+                            <li>Ensure button is keyboard accessible and has sufficient target size/clickable area.</li>
+                        </ul>
+                        (Helps meet WCAG 3.3.8 Accessible Authentication)
+                    </li>
+                    <li>`autocomplete` attribute (`current-password`, `new-password`) helps password managers (WCAG 1.3.5 Identify Input Purpose).</li>
                 </ul>
             </div>
         </div>
@@ -1657,30 +2149,44 @@
              <fieldset class="radio-group">
                  <legend>Preferred Contact Method <span class="required-indicator" aria-hidden="true">*</span></legend>
                  <div class="form-group">
-                    <input type="radio" id="contactEmail" name="contact_method" value="email" checked required aria-required="true">
-                    <label for="contactEmail" class="inline-label">Email</label>
+                     <input type="radio" id="contactEmail" name="contact_method" value="email" checked required aria-required="true">
+                     <label for="contactEmail" class="inline-label">Email</label>
                  </div>
                  <div class="form-group">
-                    <input type="radio" id="contactPhone" name="contact_method" value="phone" required aria-required="true">
-                    <label for="contactPhone" class="inline-label">Phone</label>
+                     <input type="radio" id="contactPhone" name="contact_method" value="phone" required aria-required="true">
+                     <label for="contactPhone" class="inline-label">Phone</label>
                  </div>
                  <div class="form-group">
-                     <input type="radio" id="contactMail" name="contact_method" value="mail" required aria-required="true" disabled>
-                     <label for="contactMail" class="inline-label">Postal Mail (Unavailable)</label>
+                      <input type="radio" id="contactMail" name="contact_method" value="mail" required aria-required="true" disabled>
+                      <label for="contactMail" class="inline-label">Postal Mail (Unavailable)</label>
                  </div>
-            </fieldset>
-             <pre><code>&lt;!-- ... Radio Buttons HTML ... --&gt;</code></pre>
+             </fieldset>
+             <h3>Code Snippet</h3> <pre><code>&lt;fieldset class="radio-group"&gt;
+  &lt;legend&gt;Select Delivery Option:&lt;/legend&gt;
+  &lt;div class="form-group"&gt;
+    &lt;input type="radio" id="deliveryStandard" name="delivery_option" value="standard" checked&gt;
+    &lt;label for="deliveryStandard"&gt;Standard (5-7 days)&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group"&gt;
+    &lt;input type="radio" id="deliveryExpress" name="delivery_option" value="express"&gt;
+    &lt;label for="deliveryExpress"&gt;Express (1-2 days)&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class="form-group"&gt;
+    &lt;input type="radio" id="deliveryPickup" name="delivery_option" value="pickup" disabled&gt;
+    &lt;label for="deliveryPickup"&gt;In-Store Pickup (Not Available)&lt;/label&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;</code></pre>
              <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                 <ul>
-                    <li><strong>Label Association:</strong> CRITICAL (<code>for</code>/<code>id</code>).</li>
-                    <li><strong>Grouping:</strong> MUST use <code>&lt;fieldset&gt;</code>/<code>&lt;legend&gt;</code>.</li>
-                    <li><strong>`name` Attribute:</strong> MUST be identical for all radios in a group. (WCAG 1.3.1, 4.1.2)</li>
-                    <li><strong>State:</strong> `checked` attribute. Announced by screen readers.</li>
-                    <li><strong>Keyboard:</strong> Arrow keys navigate within group; Spacebar selects. Tab moves in/out of group.</li>
-                    <li><strong>Default Selection:</strong> Recommended.</li>
-                    <li><strong>Target Size:</strong> Ensure label provides sufficient clickable area. (WCAG 2.5.5)</li>
-                </ul>
+                    <li><strong>Label Association:</strong> CRITICAL (`for`/`id`).</li>
+                    <li><strong>Grouping:</strong> MUST use `<fieldset>`/`<legend>` to group related radio buttons. The legend describes the group question.</li>
+                    <li><strong>`name` Attribute:</strong> MUST be identical for all radios in a group to ensure only one can be selected. (WCAG 1.3.1, 4.1.2)</li>
+                    <li><strong>State:</strong> `checked` attribute indicates selection. Announced by screen readers.</li>
+                    <li><strong>Keyboard:</strong> Arrow keys (Up/Down/Left/Right) navigate *and select* within the group once one radio has focus. Tab moves into/out of the entire group.</li>
+                    <li><strong>Default Selection:</strong> Recommended to have one option selected by default.</li>
+                    <li><strong>Target Size:</strong> Ensure label provides sufficient clickable area (WCAG 2.5.5).</li>
+                 </ul>
             </div>
         </div>
 
@@ -1691,42 +2197,65 @@
                 <label for="rangeInputExample">Volume</label>
                 <input type="range" id="rangeInputExample" name="volume" min="0" max="100" step="1" value="50" aria-describedby="rangeValueHelp">
                 <output for="rangeInputExample" class="range-value" id="rangeValueOutput">50</output>
-                <small id="rangeValueHelp" class="help-text visually-hidden">Use arrows. Value displayed.</small>
+                <small id="rangeValueHelp" class="help-text visually-hidden">Use arrow keys to adjust. Current value is displayed.</small>
             </div>
-            <script> /* JS included in main script block */ </script>
-            <pre><code>&lt;!-- ... Range Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group range-group"&gt;
+  &lt;label for="brightnessRange"&gt;Brightness:&lt;/label&gt;
+  &lt;input type="range" id="brightnessRange" name="brightness"
+         min="0" max="100" step="10" value="70"
+         aria-describedby="brightnessValueHelp"&gt;
+  &lt;output for="brightnessRange" class="range-value" id="brightnessOutput"&gt;70&lt;/output&gt;%
+  &lt;small id="brightnessValueHelp" class="help-text visually-hidden"&gt;Use arrow keys. Current value shown.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
              <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                  <ul>
-                    <li><strong>Label Association:</strong> Essential (<code>for</code>/<code>id</code>).</li>
-                    <li><strong>Communicating Value:</strong> CRITICAL. Must provide current value accessibly (e.g., update text via JS using `<output>`, use `aria-valuetext`). (WCAG 4.1.2)</li>
-                    <li><strong>Keyboard:</strong> Arrow keys adjust; Home/End jump.</li>
-                    <li><strong>Min/Max/Step:</strong> Define range/increments.</li>
-                    <li><strong>Target Size:</strong> Ensure slider thumb/track provides adequate target area (min height helps). (WCAG 2.5.5)</li>
-                </ul>
+                     <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                     <li><strong>Communicating Value:</strong> CRITICAL. Screen reader users cannot see the slider position. Provide the current value accessibly:
+                         <ul>
+                            <li>Use `<output for="inputId">` linked to the input, updated via JS (good semantic choice).</li>
+                            <li>Use `aria-valuetext` attribute on the input, updated via JS.</li>
+                            <li>Include value in a nearby visible text element linked via `aria-describedby`.</li>
+                         </ul>
+                         (WCAG 4.1.2 Name, Role, Value)
+                     </li>
+                     <li><strong>Keyboard:</strong> Arrow keys adjust value (Left/Right usually; Up/Down might also work). Home/End jump to min/max. PageUp/PageDown may move in larger steps.</li>
+                     <li><strong>Min/Max/Step Attributes:</strong> Define range and increments.</li>
+                     <li><strong>Target Size:</strong> Ensure slider thumb/track provides adequate target area (min height helps) (WCAG 2.5.5). Styling the thumb might be needed.</li>
+                 </ul>
             </div>
         </div>
 
         <div class="form-control-item" id="search-input-content-area-example-section" data-keywords="search find query input filter content">
             <h2>Search Input (Content Area Example)</h2>
             <p>Input specifically for search queries within the main content area.</p>
-             <div class="form-group" role="search">
-                <label for="searchInputExampleContent">Search Documentation</label>
-                <div style="display: flex; align-items: center; gap: var(--spacing-unit);">
-                    <input type="search" id="searchInputExampleContent" name="query_content" placeholder="Enter search term..." style="flex-grow: 1;">
-                    <button type="submit" class="secondary" aria-label="Search Documentation">Search</button>
-                </div>
+              <div class="form-group" role="search">
+                 <label for="searchInputExampleContent">Search Documentation</label>
+                 <div style="display: flex; align-items: center; gap: var(--spacing-unit);">
+                      <input type="search" id="searchInputExampleContent" name="query_content" placeholder="Enter search term..." style="flex-grow: 1;">
+                      <button type="submit" class="secondary">Search</button>
+                 </div>
             </div>
-            <pre><code>&lt;!-- ... Search Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;!-- Search within a landmark --&gt;
+&lt;form class="form-group" role="search" action="/docs-search" method="get"&gt;
+  &lt;label for="docSearchInput"&gt;Search Site Documentation:&lt;/label&gt;
+  &lt;div style="display: flex; gap: 8px;"&gt;
+    &lt;input type="search" id="docSearchInput" name="q"
+           placeholder="e.g., accessibility, components"
+           aria-label="Search Documentation" &lt;!-- Use if label not visible --&gt;
+           style="flex-grow: 1;"&gt;
+    &lt;button type="submit" class="secondary"&gt;Search&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                  <ul>
-                    <li>Follows Text Input principles (for input and button).</li>
-                    <li><code>type="search"</code> may provide 'clear' button.</li>
-                    <li>Visible label recommended.</li>
-                    <li>Button association usually automatic with `type="submit"`.</li>
-                    <li>Use <strong>`aria-live` region</strong> for announcing dynamic results if applicable. (WCAG 4.1.3)</li>
-                    <li><strong>`role="search"`</strong> provides landmark.</li>
+                     <li>Follows Text Input principles (Label, Focus, Target Size).</li>
+                     <li>`type="search"` provides semantic meaning and may add a built-in 'clear' button (browser dependent).</li>
+                     <li>Visible label is preferred. If not possible, use `aria-label` on the input.</li>
+                     <li>Use `role="search"` on the containing `<form>` or `<div>` to create a landmark region, making it easier to navigate to.</li>
+                     <li>Button Association: Ensure the search button is clearly associated (usually via `<form>` or described by label).</li>
+                     <li>Dynamic Results: If results update dynamically without page reload, announce them using an `aria-live` region (WCAG 4.1.3 Status Messages).</li>
                  </ul>
             </div>
         </div>
@@ -1751,18 +2280,34 @@
                      <option value="OTHER">Other</option>
                 </select>
             </div>
-            <pre><code>&lt;!-- ... Select HTML ... --&gt;</code></pre>
+            <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="stateSelect"&gt;Select State:&lt;/label&gt;
+  &lt;select id="stateSelect" name="state" required aria-required="true"&gt;
+    &lt;option value="" disabled selected&gt;-- Select a State --&lt;/option&gt;
+    &lt;optgroup label="West Coast"&gt;
+      &lt;option value="CA"&gt;California&lt;/option&gt;
+      &lt;option value="OR"&gt;Oregon&lt;/option&gt;
+      &lt;option value="WA"&gt;Washington&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="East Coast"&gt;
+      &lt;option value="NY"&gt;New York&lt;/option&gt;
+      &lt;option value="MA"&gt;Massachusetts&lt;/option&gt;
+      &lt;option value="FL"&gt;Florida&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;option value="Other"&gt;Other&lt;/option&gt; &lt;!-- Avoid disabling if possible --&gt;
+  &lt;/select&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                 <ul>
-                    <li><strong>Label Association:</strong> Essential (<code>for</code>/<code>id</code>).</li>
-                    <li><strong>Native Element:</strong> Generally very accessible.</li>
-                    <li><strong>Options:</strong> Use <code>&lt;option&gt;</code> (text is read, `value` submitted).</li>
-                    <li><strong>Option Groups:</strong> Use <code>&lt;optgroup&gt;</code> for semantic grouping.</li>
-                    <li><strong>Placeholder Option:</strong> Use a disabled, selected first option with `value=""`.</li>
-                    <li><strong>Keyboard:</strong> Space/Alt+Down opens; Arrows navigate; Enter selects; Typing jumps.</li>
-                    <li><strong>Custom Selects:</strong> Avoid unless necessary; complex to make accessible.</li>
-                    <li><strong>Target Size:</strong> Ensure min. 44px height. (WCAG 2.5.5)</li>
+                    <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                    <li><strong>Native Element:</strong> Standard `<select>` is generally very accessible out-of-the-box.</li>
+                    <li><strong>Options:</strong> Use `<option>`. Visible text is read by screen readers; `value` attribute is submitted.</li>
+                    <li><strong>Option Groups:</strong> Use `<optgroup label="...">` for semantic grouping within long lists.</li>
+                    <li><strong>Placeholder Option:</strong> Use a first option that is `disabled` and `selected` with an empty `value` (e.g., `<option value="" disabled selected>Choose...</option>`).</li>
+                    <li><strong>Keyboard:</strong> Native controls handle keyboard well (Space/Alt+Down opens; Arrows navigate; Enter selects; Typing letters jumps to options).</li>
+                    <li><strong>Custom Selects:</strong> Avoid building custom selects if possible. They are very complex to make fully accessible (requires managing focus, ARIA roles like `listbox`/`option`, `aria-expanded`, selection state, keyboard nav, etc.). Stick to native `<select>` unless absolutely necessary.</li>
+                    <li><strong>Target Size:</strong> Ensure min. 44px height (WCAG 2.5.5).</li>
                 </ul>
             </div>
         </div>
@@ -1775,17 +2320,26 @@
                 <input type="text" id="textInputExample" name="username" placeholder="E.g., Jane Doe" required aria-required="true" aria-describedby="nameHelp">
                 <small id="nameHelp" class="help-text">Please enter your full name.</small>
             </div>
-            <pre><code>&lt;!-- ... Text Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="firstName"&gt;First Name:&lt;/label&gt;
+  &lt;input type="text" id="firstName" name="first_name"
+         placeholder="Enter your first name"
+         required aria-required="true"
+         autocomplete="given-name" &lt;!-- Helps autofill --&gt;
+         aria-describedby="firstNameHelp"&gt;
+  &lt;small id="firstNameHelp" class="help-text"&gt;As shown on your ID.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                 <ul>
-                    <li><strong>Label Association:</strong> The <code>&lt;label&gt;</code>'s <code>for</code> attribute must match the <code>&lt;input&gt;</code>'s <code>id</code>. (WCAG 1.3.1, 3.3.2, 4.1.2)</li>
-                    <li><strong>Visible Label:</strong> Must always be visible.</li>
-                    <li><strong>Placeholder:</strong> Use only for hints, not labels. (WCAG 1.3.1, 3.3.2)</li>
-                    <li><strong>Required Fields:</strong> Indicate visually and programmatically (<code>required</code>/<code>aria-required="true"</code>). (WCAG 3.3.2)</li>
-                    <li><strong>Instructions/Hints:</strong> Link via <code>aria-describedby</code>. (WCAG 3.3.2)</li>
-                    <li><strong>Focus Indicator:</strong> Ensure clear visual focus. (WCAG 2.4.7, 2.4.11)</li>
-                    <li><strong>Target Size:</strong> Ensure min. 44px height. (WCAG 2.5.5)</li>
+                    <li><strong>Label Association:</strong> CRITICAL. `<label for="id">` must match `input id`. (WCAG 1.3.1, 3.3.2, 4.1.2)</li>
+                    <li><strong>Visible Label:</strong> Always provide a visible label.</li>
+                    <li><strong>Placeholder:</strong> Use only for short hints or examples, NOT as a replacement for the label. Placeholder text disappears on input and often has poor contrast. (WCAG 1.3.1, 3.3.2)</li>
+                    <li><strong>Required Fields:</strong> Indicate visually (e.g., `*`) and programmatically using `required` attribute and/or `aria-required="true"`. (WCAG 3.3.2)</li>
+                    <li><strong>Instructions/Hints:</strong> Provide necessary instructions or format requirements using visible text linked via `aria-describedby`.</li>
+                    <li><strong>Focus Indicator:</strong> Ensure clear visual focus style (WCAG 2.4.7, 2.4.11).</li>
+                    <li><strong>Target Size:</strong> Ensure sufficient height (min. 44px recommended) (WCAG 2.5.5).</li>
+                     <li><strong>Autocomplete:</strong> Use appropriate `autocomplete` values (e.g., `name`, `given-name`, `street-address`) to help users autofill forms (WCAG 1.3.5).</li>
                 </ul>
             </div>
         </div>
@@ -1798,14 +2352,23 @@
                 <textarea id="textareaExample" name="comments" rows="5" placeholder="Enter your feedback here..." aria-describedby="commentsHelp"></textarea>
                 <small id="commentsHelp" class="help-text">Max 500 characters.</small>
             </div>
-            <pre><code>&lt;!-- ... Textarea HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="userFeedback"&gt;Feedback:&lt;/label&gt;
+  &lt;textarea id="userFeedback" name="feedback"
+            rows="4" cols="50" &lt;!-- Suggest initial size --&gt;
+            maxlength="500" &lt;!-- Optional constraint --&gt;
+            placeholder="Please provide detailed feedback..."
+            aria-describedby="feedbackHelp"&gt;&lt;/textarea&gt; &lt;!-- Default content can go here --&gt;
+  &lt;small id="feedbackHelp" class="help-text"&gt;Limit 500 characters.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
              <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                 <ul>
-                    <li>Follows Text Input principles.</li>
-                    <li>Inherently accessible with label.</li>
-                    <li>Specify constraints (e.g., `maxlength`) if applicable.</li>
-                    <li>Ensure sufficient height for usability.</li>
+                    <li>Follows Text Input principles (Label, Focus, Target Size, Required, Describedby).</li>
+                    <li>Inherently accessible when correctly labeled.</li>
+                    <li>`rows` and `cols` attributes suggest initial size but CSS usually controls final size.</li>
+                    <li>`maxlength` attribute can limit input length. Consider providing a character count indicator if using `maxlength`.</li>
+                    <li>Ensure sufficient visible size for comfortable typing. Avoid very small textareas that require excessive scrolling.</li>
                 </ul>
             </div>
         </div>
@@ -1818,45 +2381,65 @@
                  <input type="time" id="timeInputExample" name="start_time" min="09:00" max="17:00" step="1800" aria-describedby="timeHelp">
                  <small id="timeHelp" class="help-text">Select time (9AM-5PM, 30min intervals).</small>
             </div>
-             <pre><code>&lt;!-- ... Time Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="apptTime"&gt;Appointment Time:&lt;/label&gt;
+  &lt;input type="time" id="apptTime" name="appointment_time"
+         min="09:00" max="17:00" &lt;!-- Example business hours --&gt;
+         step="900" &lt;!-- 900 seconds = 15 minutes --&gt;
+         aria-describedby="apptTimeHelp"&gt;
+  &lt;small id="apptTimeHelp" class="help-text"&gt;Select time between 9 AM and 5 PM.&lt;/small&gt;
+&lt;/div&gt;</code></pre>
              <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                  <ul>
-                    <li><strong>Label Association:</strong> Essential (<code>for</code>/<code>id</code>).</li>
-                    <li><strong>Native Picker Variance:</strong> Varies by browser. TEST.</li>
-                    <li><strong>Format Hint:</strong> Provide hints (<code>aria-describedby</code>).</li>
-                    <li><strong>Keyboard Input:</strong> Should allow direct typing.</li>
-                    <li><strong>Custom Pickers:</strong> Consider accessible libraries if needed.</li>
-                     <li><strong>Min/Max/Step:</strong> Use `min`/`max`/`step` attributes.</li>
-                     <li><strong>Target Size:</strong> Ensure min. 44px height. (WCAG 2.5.5)</li>
-                </ul>
+                     <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                     <li><strong>Type Attribute:</strong> `type="time"` triggers browser's native time picker.</li>
+                     <li><strong>Picker Accessibility:</strong> Varies by browser. TEST.</li>
+                     <li><strong>Format Hint:</strong> Provide guidance (e.g., HH:MM AM/PM or 24-hour) via `aria-describedby`. Value format is `HH:MM`.</li>
+                     <li><strong>Keyboard Input:</strong> Should allow direct typing.</li>
+                     <li><strong>Min/Max/Step Attributes:</strong> Define time range and intervals (step is in seconds).</li>
+                     <li><strong>Custom Pickers:</strong> Consider accessible custom pickers if native ones are inadequate.</li>
+                     <li><strong>Target Size:</strong> Ensure min. 44px height (WCAG 2.5.5).</li>
+                 </ul>
             </div>
         </div>
 
         <div class="form-control-item" id="toggle-switch-section" data-keywords="toggle switch on off boolean checkbox role switch">
              <h2>Toggle Switch</h2>
-             <p>Visually distinct on/off control.</p>
+             <p>Visually distinct on/off control, often used as an alternative to a checkbox.</p>
              <div class="form-group" style="display: flex; align-items: center; gap: var(--spacing-unit);">
-                 <label for="toggleSwitchExample" id="toggleSwitchLabel" class="inline-label" style="margin-bottom: 0;">Enable Feature X</label>
-                 <label class="switch" aria-labelledby="toggleSwitchLabel">
-                   <input type="checkbox" id="toggleSwitchExample" name="feature_x_enabled" role="switch">
-                   <span class="slider"></span>
-                 </label>
-            </div>
-             <pre><code>&lt;!-- ... Toggle Switch HTML ... --&gt;</code></pre>
-             <div class="accessibility-notes">
+                 <label for="toggleSwitchExample" id="toggleSwitchLabel" class="inline-label" style="margin-bottom: 0;">Enable Notifications</label>
+                 <label class="switch" aria-labelledby="toggleSwitchLabel"> <input type="checkbox" id="toggleSwitchExample" name="notifications_enabled" role="switch" aria-checked="false"> <span class="slider"></span> </label>
+             </div>
+              <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group" style="display: flex; align-items: center; gap: 8px;"&gt;
+  &lt;!-- The visible label --&gt;
+  &lt;label for="darkModeToggle" id="darkModeLabel" class="inline-label" style="margin-bottom: 0;"&gt;
+    Dark Mode
+  &lt;/label&gt;
+
+  &lt;!-- The switch mechanism --&gt;
+  &lt;label class="switch" aria-labelledby="darkModeLabel"&gt; &lt;!-- Associates label text --&gt;
+    &lt;!-- Underlying checkbox holds state --&gt;
+    &lt;input type="checkbox" id="darkModeToggle" name="dark_mode"
+           role="switch" &lt;!-- Critical ARIA role --&gt;
+           aria-checked="false"&gt; &lt;!-- State updated by JS --&gt;
+    &lt;!-- Visual slider part --&gt;
+    &lt;span class="slider"&gt;&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/div&gt;</code></pre>
+              <div class="accessibility-notes">
                  <h3>Accessibility Notes</h3>
                  <ul>
-                     <li><strong>Underlying Element:</strong> Use hidden checkbox for state.</li>
-                     <li><strong>Label Association:</strong> Associate label with checkbox (<code>for</code>/<code>id</code> or wrap). `aria-labelledby` on switch points to label.</li>
-                     <li><strong>ARIA Role:</strong> Use `role="switch"` on input or interactive container. (WCAG 4.1.2)</li>
-                     <li><strong>ARIA State:</strong> Use `aria-checked="true/false"`, kept in sync via JS.</li>
-                     <li><strong>Keyboard Interaction:</strong> Spacebar toggles.</li>
-                     <li><strong>Visual Design:</strong> Clear on/off states, sufficient contrast.</li>
-                     <li><strong>Focus Indicator:</strong> Clear focus style on switch.</li>
-                     <li><strong>Target Size:</strong> Clickable switch element needs min. 44px size. (WCAG 2.5.5)</li>
+                     <li><strong>Underlying Element:</strong> MUST use a hidden `<input type="checkbox">` to manage state.</li>
+                     <li><strong>Label Association:</strong> Associate a visible label (`<label>`) with the checkbox (`for`/`id` or wrapping). Use `aria-labelledby` on the switch container/visual element to reference the visible label's ID.</li>
+                     <li><strong>ARIA Role:</strong> Add `role="switch"` to the checkbox input.</li>
+                     <li><strong>ARIA State:</strong> Use `aria-checked="true|false"` on the checkbox, kept in sync with its `checked` state via JS. Screen readers announce this state (e.g., "Notifications, switch, off").</li>
+                     <li><strong>Keyboard Interaction:</strong> Spacebar toggles the state (checked/unchecked).</li>
+                     <li><strong>Visual Design:</strong> Ensure clear visual distinction between on/off states. Use more than just color (e.g., position of thumb). Ensure sufficient contrast.</li>
+                     <li><strong>Focus Indicator:</strong> Provide a clear focus style on the interactive switch element itself.</li>
+                     <li><strong>Target Size:</strong> The clickable switch element (the wrapping label or the slider span if interactive) needs minimum 44x44px target area (WCAG 2.5.5).</li>
                  </ul>
-             </div>
+              </div>
          </div>
 
         <div class="form-control-item" id="url-input-section" data-keywords="url web address website link input">
@@ -1866,12 +2449,22 @@
                 <label for="urlInputExample">Website URL</label>
                 <input type="url" id="urlInputExample" name="website" placeholder="https://example.com">
             </div>
-             <pre><code>&lt;!-- ... URL Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="portfolioUrl"&gt;Portfolio Website:&lt;/label&gt;
+  &lt;input type="url" id="portfolioUrl" name="portfolio_url"
+         placeholder="https://your-portfolio.com"
+         pattern="https://.*" &lt;!-- Optional: enforce protocol --&gt;
+         title="Please include https://" &lt;!-- Tooltip for pattern --&gt;
+         aria-describedby="urlHelp"&gt;
+  &lt;small id="urlHelp" class="help-text"&gt;Enter the full URL starting with https://&lt;/small&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                 <ul>
-                    <li>Follows Text Input principles.</li>
-                    <li><code>type="url"</code> provides native validation & optimized keyboard. (WCAG 3.3.1)</li>
+                    <li>Follows Text Input principles (Label, Focus, Target Size).</li>
+                    <li>`type="url"` provides semantic meaning, may trigger optimized mobile keyboards, and enables browser-level validation for URL format (WCAG 3.3.1).</li>
+                    <li>`pattern` attribute can enforce specific formats (like requiring `https://`). Use `title` attribute matching the pattern for tooltip help, and provide clear instructions via `aria-describedby`.</li>
+                     <li>Validation Feedback: Ensure validation errors are communicated accessibly.</li>
                 </ul>
             </div>
         </div>
@@ -1884,15 +2477,22 @@
                 <input type="week" id="weekInputExample" name="project_week" min="2024-W01" max="2025-W52" aria-describedby="weekHelp">
                 <small id="weekHelp" class="help-text">Select project week (YYYY-W##).</small>
             </div>
-            <pre><code>&lt;!-- ... Week Input HTML ... --&gt;</code></pre>
+             <h3>Code Snippet</h3> <pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="reportWeek"&gt;Reporting Week:&lt;/label&gt;
+  &lt;input type="week" id="reportWeek" name="report_week"
+         min="2025-W01" max="2025-W52" &lt;!-- Example range --&gt;
+         aria-describedby="weekHelpInfo"&gt;
+  &lt;small id="weekHelpInfo" class="help-text"&gt;Format: YYYY-W## (e.g., 2025-W20).&lt;/small&gt;
+&lt;/div&gt;</code></pre>
             <div class="accessibility-notes">
                 <h3>Accessibility Notes</h3>
                 <ul>
-                    <li><strong>Label Association:</strong> Essential (<code>for</code>/<code>id</code>).</li>
-                    <li><strong>Native Picker Variance:</strong> Varies. TEST.</li>
-                    <li><strong>Format Hint:</strong> Value format YYYY-W##.</li>
-                     <li><strong>Keyboard/Custom Pickers:</strong> Similar considerations as Date.</li>
-                     <li><strong>Target Size:</strong> Ensure min. 44px height. (WCAG 2.5.5)</li>
+                    <li><strong>Label Association:</strong> Essential (`for`/`id`).</li>
+                    <li><strong>Type Attribute:</strong> `type="week"` triggers browser's native week picker.</li>
+                    <li><strong>Picker Accessibility:</strong> Varies significantly. TEST.</li>
+                    <li><strong>Format Hint:</strong> Provide format (`YYYY-W##`) guidance via `aria-describedby`.</li>
+                    <li><strong>Keyboard/Custom Pickers:</strong> Similar considerations as Date Input.</li>
+                     <li><strong>Target Size:</strong> Ensure min. 44px height (WCAG 2.5.5).</li>
                 </ul>
             </div>
         </div>
@@ -2057,12 +2657,14 @@
             if (selectControlBtn && controlSelectOverlay && controlSelectList && controlSelectDialog) {
                 selectControlBtn.addEventListener('click', () => {
                     controlSelectList.innerHTML = '';
-                    const items = document.querySelectorAll('#controls-container > .form-control-item');
-                    const sortedItems = Array.from(items).sort((a, b) => {
-                        const titleA = a.querySelector('h2')?.textContent || '';
-                        const titleB = b.querySelector('h2')?.textContent || '';
-                        return titleA.localeCompare(titleB);
-                    });
+                    const items = document.querySelectorAll('#controls-container .form-control-item'); // Updated selector to include all descendants
+                    const sortedItems = Array.from(items)
+                        .filter(item => item.id && item.querySelector('h2')) // Ensure valid id and h2
+                        .sort((a, b) => {
+                            const titleA = a.querySelector('h2').textContent.trim().toLowerCase();
+                            const titleB = b.querySelector('h2').textContent.trim().toLowerCase();
+                            return titleA.localeCompare(titleB);
+                        });
 
                     sortedItems.forEach(item => {
                         const heading = item.querySelector('h2');
@@ -2071,15 +2673,15 @@
                             const li = document.createElement('li');
                             const link = document.createElement('a');
                             link.href = `#${itemId}`;
-                            link.textContent = heading.textContent;
+                            link.textContent = heading.textContent.trim();
                             link.addEventListener('click', (e) => {
                                 e.preventDefault();
                                 const targetElement = document.getElementById(itemId);
                                 closeDialogGeneric(link); // Close first
                                 if (targetElement) {
                                     setTimeout(() => {
-                                         targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                         targetElement.querySelector('h2')?.focus({ preventScroll: true });
+                                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        targetElement.querySelector('h2')?.focus({ preventScroll: true });
                                     }, 50);
                                 }
                             });
@@ -2136,32 +2738,157 @@
                 });
             }
 
-            // --- Carousel Logic (Basic) ---
-            const carousels = document.querySelectorAll('.carousel');
-            carousels.forEach(carousel => {
-                const slidesContainer = carousel.querySelector('.carousel-slides');
-                const slides = carousel.querySelectorAll('.carousel-slide');
-                const prevButton = carousel.querySelector('.carousel-button.prev');
-                const nextButton = carousel.querySelector('.carousel-button.next');
-                const paginationButtons = carousel.querySelectorAll('.carousel-pagination button');
-                const statusDiv = carousel.querySelector('.carousel-status');
-                let currentIndex = 0;
-                const totalSlides = slides.length;
+// --- Carousel Logic (Enhanced) ---
+const carousels = document.querySelectorAll('.carousel');
+         carousels.forEach(carousel => {
+             const slidesContainer = carousel.querySelector('.carousel-slides');
+             const slides = carousel.querySelectorAll('.carousel-slide');
+             const prevButton = carousel.querySelector('.carousel-button.prev');
+             const nextButton = carousel.querySelector('.carousel-button.next');
+             const paginationButtons = carousel.querySelectorAll('.carousel-pagination button');
+             const statusDiv = carousel.querySelector('.carousel-status');
+             const pausePlayButton = carousel.querySelector('.carousel-pause-play'); // Get the new button
 
-                const updateCarousel = (newIndex) => {
-                    if (totalSlides === 0 || !slidesContainer) return;
-                    currentIndex = (newIndex + totalSlides) % totalSlides;
-                    slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-                    paginationButtons.forEach((btn, index) => btn.setAttribute('aria-selected', index === currentIndex));
-                    slides.forEach((slide, index) => slide.setAttribute('aria-label', `${index + 1} of ${totalSlides}`));
-                    if (statusDiv) statusDiv.textContent = `Item ${currentIndex + 1} of ${totalSlides}`;
-                };
+             let currentIndex = 0;
+             const totalSlides = slides.length;
+             let intervalId = null;
+             const autoPlayInterval = 5000; // Time per slide in ms (e.g., 5 seconds)
+             let isPlaying = true; // Autoplay starts on
+             let userPaused = false; // Track if paused explicitly by user
 
-                if (prevButton) prevButton.addEventListener('click', () => updateCarousel(currentIndex - 1));
-                if (nextButton) nextButton.addEventListener('click', () => updateCarousel(currentIndex + 1));
-                paginationButtons.forEach((btn, index) => btn.addEventListener('click', () => updateCarousel(index)));
-                if(totalSlides > 0) updateCarousel(0);
+             const updateCarousel = (newIndex, keepFocus = false) => {
+                 if (totalSlides === 0 || !slidesContainer) return;
+
+                 // Stop autoplay temporarily during manual navigation or update
+                 stopAutoPlay();
+
+                 currentIndex = (newIndex + totalSlides) % totalSlides;
+                 slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+                 paginationButtons.forEach((btn, index) => btn.setAttribute('aria-selected', index === currentIndex));
+
+                 // Update slide labels (good practice)
+                 slides.forEach((slide, index) => {
+                    slide.setAttribute('aria-label', `${index + 1} of ${totalSlides}`);
+                    // Optional: Make only visible slide interactive/discoverable by AT
+                    // slide.setAttribute('aria-hidden', index !== currentIndex);
+                    // slide.inert = (index !== currentIndex); // More modern approach
+                 });
+
+
+                 if (statusDiv) statusDiv.textContent = `Item ${currentIndex + 1} of ${totalSlides}`;
+
+                 // Only restart autoplay if it wasn't explicitly paused by the user
+                 if (!userPaused) {
+                     startAutoPlay();
+                 }
+
+                 // Optional: Manage focus after update (simple: keep focus on control)
+                 // If keepFocus is false, you might blur or move focus elsewhere if needed.
+             };
+
+             const startAutoPlay = () => {
+                 if (intervalId) clearInterval(intervalId); // Clear existing interval
+                 if (isPlaying && totalSlides > 1) { // Only play if isPlaying is true
+                     intervalId = setInterval(() => {
+                         updateCarousel(currentIndex + 1);
+                     }, autoPlayInterval);
+                 }
+             };
+
+             const stopAutoPlay = () => {
+                 clearInterval(intervalId);
+                 intervalId = null;
+             };
+
+             const togglePlayState = (play) => {
+                isPlaying = play;
+                if (pausePlayButton) {
+                    pausePlayButton.textContent = isPlaying ? 'Pause' : 'Play';
+                    pausePlayButton.setAttribute('aria-label', isPlaying ? 'Pause carousel' : 'Play carousel');
+                }
+                 if (isPlaying) {
+                    startAutoPlay();
+                 } else {
+                    stopAutoPlay();
+                 }
+             };
+
+             // --- Event Listeners ---
+
+             // Previous/Next Buttons
+             if (prevButton) prevButton.addEventListener('click', () => {
+                userPaused = true; // Manual interaction pauses
+                togglePlayState(false);
+                updateCarousel(currentIndex - 1);
+             });
+             if (nextButton) nextButton.addEventListener('click', () => {
+                userPaused = true; // Manual interaction pauses
+                togglePlayState(false);
+                updateCarousel(currentIndex + 1);
+             });
+
+             // Pagination Buttons
+             paginationButtons.forEach((btn, index) => btn.addEventListener('click', () => {
+                 userPaused = true; // Manual interaction pauses
+                 togglePlayState(false);
+                 updateCarousel(index);
+             }));
+
+             // Pause/Play Button
+             if (pausePlayButton) {
+                 pausePlayButton.addEventListener('click', () => {
+                     userPaused = !userPaused; // Toggle explicit pause state
+                     togglePlayState(!userPaused); // Update play state based on user pause
+                 });
+             }
+
+             // Keyboard Navigation (Arrows on Carousel Container)
+             carousel.addEventListener('keydown', (e) => {
+                 let handled = false;
+                 if (e.key === 'ArrowLeft') {
+                     userPaused = true; // Manual interaction pauses
+                     togglePlayState(false);
+                     updateCarousel(currentIndex - 1);
+                     handled = true;
+                 } else if (e.key === 'ArrowRight') {
+                     userPaused = true; // Manual interaction pauses
+                     togglePlayState(false);
+                     updateCarousel(currentIndex + 1);
+                     handled = true;
+                 }
+                 if (handled) {
+                     e.preventDefault(); // Prevent page scroll
+                 }
+             });
+
+             // Pause on Hover
+             carousel.addEventListener('mouseenter', () => {
+                 if (isPlaying) stopAutoPlay(); // Pause visually
+             });
+             carousel.addEventListener('mouseleave', () => {
+                if (isPlaying && !userPaused) startAutoPlay(); // Resume only if playing and not user-paused
+             });
+
+             // Pause on Focus within Component
+            carousel.addEventListener('focusin', () => {
+                 if (isPlaying) stopAutoPlay(); // Pause visually
+             });
+            carousel.addEventListener('focusout', (e) => {
+                // Check if focus is still within the carousel
+                if (!carousel.contains(e.relatedTarget)) {
+                   if (isPlaying && !userPaused) startAutoPlay(); // Resume only if playing, not user-paused, and focus left carousel
+                }
             });
+
+
+             // Initial Setup
+             if(totalSlides > 0) {
+                 updateCarousel(0); // Set initial slide view
+                 togglePlayState(isPlaying); // Start autoplay if initially set to play
+             } else if (pausePlayButton) {
+                pausePlayButton.disabled = true; // Disable button if no slides
+             }
+         });
 
 
             // --- Listbox Logic (Basic Focus & Selection) ---
@@ -2255,7 +2982,28 @@
                      if (moveDownBtn) moveDownBtn.addEventListener('click', () => moveOption('down'));
                  }
             });
+// --- Password Show/Hide Toggle ---
+         const passwordInput = document.getElementById('passwordInputExample');
+         const passwordToggleBtn = document.getElementById('passwordToggleBtn');
 
+         if (passwordInput && passwordToggleBtn) {
+             passwordToggleBtn.addEventListener('click', () => {
+                 // Check current type
+                 const currentType = passwordInput.getAttribute('type');
+
+                 if (currentType === 'password') {
+                     // Change to text
+                     passwordInput.setAttribute('type', 'text');
+                     passwordToggleBtn.textContent = 'Hide';
+                     passwordToggleBtn.setAttribute('aria-label', 'Hide password');
+                 } else {
+                     // Change back to password
+                     passwordInput.setAttribute('type', 'password');
+                     passwordToggleBtn.textContent = 'Show';
+                     passwordToggleBtn.setAttribute('aria-label', 'Show password');
+                 }
+             });
+         }
 
             // --- Search/Filter Logic ---
             const searchInput = document.getElementById('controlSearchInput');
